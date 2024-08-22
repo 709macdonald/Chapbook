@@ -1,16 +1,19 @@
-// FileManager.js
 import React, { useState } from "react";
 
 const FileManager = ({ setFiles }) => {
   const [directoryHandle, setDirectoryHandle] = useState(null);
 
   const openFolder = async () => {
-    try {
-      const handle = await window.showDirectoryPicker();
-      setDirectoryHandle(handle);
-      await listFiles(handle);
-    } catch (error) {
-      console.error("Error opening folder:", error);
+    if ("showDirectoryPicker" in window) {
+      try {
+        const handle = await window.showDirectoryPicker();
+        setDirectoryHandle(handle);
+        await listFiles(handle);
+      } catch (error) {
+        console.error("Error opening folder:", error);
+      }
+    } else {
+      console.error("File System Access API is not supported in this browser.");
     }
   };
 

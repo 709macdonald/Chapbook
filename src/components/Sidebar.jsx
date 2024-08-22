@@ -1,10 +1,7 @@
-// Sidebar.js
-import React, { useState } from "react";
+import React from "react";
 import FileManager from "./FileManager";
 
-export default function Sidebar() {
-  const [files, setFiles] = useState([]);
-
+export default function Sidebar({ files, setFiles }) {
   return (
     <div className="sidebarBG">
       <div className="searchParameters">

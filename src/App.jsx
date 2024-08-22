@@ -1,9 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Main from "./components/Main";
 import Sidebar from "./components/Sidebar";
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(true);
+  const [files, setFiles] = useState([]);
 
   function handleToggleSidebar() {
     setShowSidebar(!showSidebar);
@@ -11,10 +12,11 @@ function App() {
 
   return (
     <>
-      {showSidebar && <Sidebar />}
+      {showSidebar && <Sidebar files={files} setFiles={setFiles} />}
       <Main
         showSidebar={showSidebar}
         handleToggleSidebar={handleToggleSidebar}
+        files={files}
       />
     </>
   );
