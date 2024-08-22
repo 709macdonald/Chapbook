@@ -4,11 +4,68 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgba(22, 22, 22, 0.87);
+  background-color: rgb(244, 244, 244);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.bgText {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  color: rgb(171, 169, 169);
+}
+
+.book {
+  color: rgba(84, 84, 84, 0.87);
+}
+
+.mainScreen {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.menuIcon {
+  position: absolute;
+  z-index: 4;
+}
+
+.sidebarContents {
+  position: absolute;
+  z-index: 3;
+  background-color: rgb(249, 249, 249);
+  height: 100vh;
+  width: 15rem;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); /* Example shadow */
 }

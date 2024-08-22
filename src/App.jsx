@@ -4,8 +4,8 @@ import Sidebar from "./components/Sidebar";
 function App() {
   return (
     <>
-      <Main />
       <Sidebar />
+      <Main />
     </>
   );
 }
