@@ -47,6 +47,8 @@
   color: rgba(84, 84, 84, 0.87);
 }
 
+/* MAINSCREEN CSS */
+
 .mainScreen {
   width: 100vw;
   height: 100vh;
@@ -55,6 +57,8 @@
   left: 0;
   z-index: 2;
 }
+
+/* MENU ICON CSS */
 
 .menuIcon {
   position: fixed;
@@ -76,11 +80,74 @@
   cursor: pointer;
 }
 
-.sidebarContents {
+/* SIDEBAR CSS */
+
+.sidebarBG {
   position: absolute;
   z-index: 3;
   background-color: rgb(249, 249, 249);
   height: 100vh;
-  width: 15rem;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); /* Example shadow */
+  width: 20rem;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.searchParameters {
+  margin-top: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#searchBar {
+  height: 2rem;
+  padding-left: 0.5rem;
+  background-color: rgb(247, 247, 247);
+  color: black;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+}
+
+.checkBoxDiv {
+  margin-top: 1rem;
+}
+
+.checkbox {
+  padding: 0.2rem;
+}
+
+input[type="checkbox"] {
+  width: 2rem;
+  border-radius: 20rem;
+  accent-color: white;
+  background-color: white;
+  cursor: pointer;
+}
+
+.documentSection {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+.fileButtons {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.fileIcon {
+  font-size: 1.7rem;
+  color: rgb(93, 93, 93);
+  padding-right: 1rem;
+}
+
+.documentSectionDiv {
+  display: flex;
+  padding: 0.3rem;
 }
