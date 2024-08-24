@@ -6,16 +6,16 @@ export default function Sidebar({ setFiles }) {
     <div className="sidebarBG">
       <div className="searchParameters">
         <FileManager setFiles={setFiles} />
-        <p>No File Selected</p>
+        <p className="folderName">No Folder Selected</p>
         <div className="searchField">
-          <button className="searchButton">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
           <input
             type="text"
             id="searchBar"
             placeholder="Search for Keywords"
           ></input>
+          <button className="searchButton">
+            <i className="fa-solid fa-magnifying-glass searchIcon"></i>
+          </button>
         </div>
         <div className="checkBoxDiv">
           <div className="checkbox">

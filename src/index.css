@@ -131,41 +131,7 @@
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.searchParameters {
-  margin-top: 4rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  display: flex;
-  flex-direction: column;
-}
-
-#searchBar {
-  height: 2rem;
-  padding-left: 0.5rem;
-  background-color: rgb(247, 247, 247);
-  color: black;
-  border-radius: 0.4rem;
-  font-size: 1rem;
-}
-
-.checkBoxDiv {
-  margin-top: 1rem;
-}
-
-.checkbox {
-  padding: 0.2rem;
-}
-
-input[type="checkbox"] {
-  width: 2rem;
-  border-radius: 20rem;
-  accent-color: white;
-  background-color: white;
-  cursor: pointer;
-}
-
 .documentSection {
-  padding-left: 2rem;
   padding-right: 2rem;
   display: flex;
   flex-direction: column;
@@ -190,4 +156,61 @@ input[type="checkbox"] {
 .documentSectionDiv {
   display: flex;
   padding: 0.3rem;
+}
+
+.folderName {
+  padding-bottom: 1rem;
+}
+
+.searchParameters {
+  margin-top: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchButton {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.searchIcon {
+  font-size: 1rem;
+  color: rgb(93, 93, 93);
+  background-color: transparent;
+  padding-left: 1rem;
+}
+
+.searchField {
+  display: flex;
+}
+
+#searchBar {
+  height: 2rem;
+  background-color: rgb(247, 247, 247);
+  color: black;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.checkBoxDiv {
+  margin-top: 1rem;
+}
+
+.checkbox {
+  padding: 0.2rem;
+}
+
+input[type="checkbox"] {
+  width: 2rem;
+  border-radius: 20rem;
+  accent-color: white;
+  background-color: white;
+  cursor: pointer;
 }
