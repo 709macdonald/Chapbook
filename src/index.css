@@ -56,6 +56,33 @@
   top: 0;
   left: 0;
   z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  overflow-y: scroll;
+}
+
+.fileList {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.fileDisplay {
+  background-color: rgb(255, 255, 255);
+  border: 2px solid #000000; /* Blue border around each file item */
+  border-radius: 1rem;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+  min-height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* MENU ICON CSS */
