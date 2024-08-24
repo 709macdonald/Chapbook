@@ -1,7 +1,7 @@
 import React from "react";
 import FileManager from "./FileManager";
 
-export default function Sidebar({ files, setFiles }) {
+export default function Sidebar({ setFiles }) {
   return (
     <div className="sidebarBG">
       <div className="searchParameters">
@@ -30,11 +30,6 @@ export default function Sidebar({ files, setFiles }) {
         </div>
       </div>
       <FileManager setFiles={setFiles} />
-      <div className="fileList">
-        {files.map((file, index) => (
-          <div key={index}>{file}</div>
-        ))}
-      </div>
     </div>
   );
 }

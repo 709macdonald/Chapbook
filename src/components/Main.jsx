@@ -1,7 +1,6 @@
 import React from "react";
 
-export default function Main(props) {
-  const { showSidebar, handleToggleSidebar } = props;
+export default function Main({ files, handleToggleSidebar }) {
   return (
     <div className="mainContainer">
       <div className="bgText">
@@ -9,7 +8,19 @@ export default function Main(props) {
           Chap<span className="book">book</span>
         </h2>
       </div>
-      <div className="mainScreen"></div>
+      <div className="mainScreen">
+        <div className="fileList">
+          {files.length > 0 ? (
+            files.map((file, index) => (
+              <div key={index} className="fileDisplay">
+                {file}
+              </div>
+            ))
+          ) : (
+            <p>No files to display</p>
+          )}
+        </div>
+      </div>
       <div className="menuIcon">
         <button onClick={handleToggleSidebar} className="menuButton">
           <i className="fa-solid fa-bars icon-large"></i>
