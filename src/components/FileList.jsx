@@ -7,7 +7,10 @@ const FileList = ({ files }) => {
         files.map((file, index) => (
           <div key={index} className="fileDisplay">
             <i className="fa-regular fa-file-pdf pdfIcon"></i>
-            <p className="pdfText">{file}</p>
+            <p className="pdfText">{file.name}</p>
+            <a href={file.url} target="_blank" rel="noopener noreferrer">
+              View File
+            </a>
           </div>
         ))
       ) : (
