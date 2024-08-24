@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import FileLister from "./FileLister";
 
 const FileManager = ({ setFiles, setFolderName }) => {
-  const [directoryHandle, setDirectoryHandle] = useState(null);
+  const [directoryHandle, setDirectoryHandle] = React.useState(null);
 
   const openFolder = async () => {
     if ("showDirectoryPicker" in window) {

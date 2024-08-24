@@ -159,7 +159,9 @@
 }
 
 .folderName {
-  padding-bottom: 1rem;
+  padding-top: 0.2rem;
+  padding-left: 1rem;
+  font-style: italic;
 }
 
 .searchParameters {
@@ -188,6 +190,7 @@
 
 .searchField {
   display: flex;
+  padding-top: 1rem;
 }
 
 #searchBar {

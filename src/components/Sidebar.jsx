@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import FileManager from "./FileManager";
 
-export default function Sidebar({ setFiles }) {
-  const [folderName, setFolderName] = useState("No Folder Selected");
-
+export default function Sidebar({ setFiles, folderName, setFolderName }) {
   return (
     <div className="sidebarBG">
       <div className="searchParameters">
-        <FileManager setFiles={setFiles} setFolderName={setFolderName} />
-        <p className="folderName">{folderName}</p>
         <div className="searchField">
           <input type="text" id="searchBar" placeholder="Search for Keywords" />
           <button className="searchButton">
@@ -33,6 +29,8 @@ export default function Sidebar({ setFiles }) {
             <label htmlFor="searchPages">Search Pages Docs</label>
           </div>
         </div>
+        <FileManager setFiles={setFiles} setFolderName={setFolderName} />
+        <p className="folderName">{folderName}</p>
       </div>
     </div>
   );
