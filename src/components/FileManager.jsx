@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FileLister from "./FileLister"; // Import the new component
+import FileLister from "./FileLister";
 
 const FileManager = ({ setFiles }) => {
   const [directoryHandle, setDirectoryHandle] = useState(null);
@@ -25,7 +25,6 @@ const FileManager = ({ setFiles }) => {
         </button>
         <label htmlFor="fileDirectory">Choose Folder</label>
       </div>
-      {/* Render the FileLister component */}
       {directoryHandle && (
         <FileLister handle={directoryHandle} setFiles={setFiles} />
       )}

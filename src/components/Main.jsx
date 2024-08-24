@@ -1,5 +1,5 @@
 import React from "react";
-import FileList from "./FileList"; // Import the new component
+import FileList from "./FileList";
 
 export default function Main({ files, handleToggleSidebar }) {
   return (
@@ -10,7 +10,6 @@ export default function Main({ files, handleToggleSidebar }) {
         </h2>
       </div>
       <div className="mainScreen">
-        {/* Render the FileList component */}
         <FileList files={files} />
       </div>
       <div className="menuIcon">

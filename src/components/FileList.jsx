@@ -1,4 +1,3 @@
-// FileList.jsx
 import React from "react";
 
 const FileList = ({ files }) => {
@@ -7,7 +6,8 @@ const FileList = ({ files }) => {
       {files.length > 0 ? (
         files.map((file, index) => (
           <div key={index} className="fileDisplay">
-            {file}
+            <i className="fa-regular fa-file-pdf pdfIcon"></i>
+            <p className="pdfText">{file}</p>
           </div>
         ))
       ) : (

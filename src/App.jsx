@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Main from "./components/Main";
 import Sidebar from "./components/Sidebar";
-import FileManager from "./components/FileManager"; // Ensure this import is correct
+import FileManager from "./components/FileManager";
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -20,7 +20,6 @@ function App() {
         files={files}
       />
       <FileManager setFiles={setFiles} />{" "}
-      {/* Ensure FileManager is used correctly */}
     </>
   );
 }

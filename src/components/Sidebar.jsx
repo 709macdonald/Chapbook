@@ -5,11 +5,18 @@ export default function Sidebar({ setFiles }) {
   return (
     <div className="sidebarBG">
       <div className="searchParameters">
-        <input
-          type="text"
-          id="searchBar"
-          placeholder="Search for Keywords"
-        ></input>
+        <FileManager setFiles={setFiles} />
+        <p>No File Selected</p>
+        <div className="searchField">
+          <button className="searchButton">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <input
+            type="text"
+            id="searchBar"
+            placeholder="Search for Keywords"
+          ></input>
+        </div>
         <div className="checkBoxDiv">
           <div className="checkbox">
             <input type="checkbox" checked id="searchPDF" readOnly></input>
@@ -29,7 +36,6 @@ export default function Sidebar({ setFiles }) {
           </div>
         </div>
       </div>
-      <FileManager setFiles={setFiles} />
     </div>
   );
 }

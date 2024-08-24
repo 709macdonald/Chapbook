@@ -80,9 +80,22 @@
   border-radius: 1rem;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   min-height: 20rem;
+  max-width: 15rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.pdfIcon {
+  font-size: 10rem;
+  color: rgb(64, 64, 64);
+}
+
+.pdfText {
+  text-align: center;
+  padding: 1rem;
+  word-wrap: break-word;
 }
 
 /* MENU ICON CSS */
