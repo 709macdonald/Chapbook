@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FileLister from "./FileLister";
 
-const FileManager = ({ setFiles }) => {
+const FileManager = ({ setFiles, setFolderName }) => {
   const [directoryHandle, setDirectoryHandle] = useState(null);
 
   const openFolder = async () => {
@@ -9,6 +9,7 @@ const FileManager = ({ setFiles }) => {
       try {
         const handle = await window.showDirectoryPicker();
         setDirectoryHandle(handle);
+        setFolderName(handle.name);
       } catch (error) {
         console.error("Error opening folder:", error);
       }

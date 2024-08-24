@@ -1,4 +1,3 @@
-// FileLister.jsx
 import React, { useEffect } from "react";
 
 const FileLister = ({ handle, setFiles }) => {
@@ -16,7 +15,7 @@ const FileLister = ({ handle, setFiles }) => {
     }
   }, [handle, setFiles]);
 
-  return null; // This component does not need to render anything itself
+  return null;
 };
 
 export default FileLister;
