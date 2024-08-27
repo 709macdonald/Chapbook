@@ -9,27 +9,33 @@ export default function Sidebar({
   files,
   setFilteredFiles,
 }) {
-  // Function to ensure file.text is always defined
   const validateFiles = (files) => {
     return files.map((file) => ({
       ...file,
-      text: file.text || "", // Ensure text is never undefined
+      text: file.text || "",
     }));
   };
 
-  const handleSearch = (keyword) => {
-    console.log("Keyword:", keyword);
+  const handleSearch = (keywords) => {
+    if (!Array.isArray(keywords)) {
+      console.error("Expected keywords to be an array");
+      return;
+    }
+
     const validFiles = validateFiles(files);
     const filtered = validFiles.filter((file) =>
-      file.text.toLowerCase().includes(keyword.toLowerCase())
+      keywords.some((keyword) =>
+        file.text.toLowerCase().includes(keyword.toLowerCase())
+      )
     );
+
+    console.log("Filtered files:", filtered); // Debugging output
 
     if (filtered.length === 0) {
       alert("No words found");
     }
 
     setFilteredFiles(filtered);
-    console.log(filtered);
   };
 
   return (
