@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const SearchBar = ({ onSearch, useAssistedSearch = false }) => {
-  const [keyword, setKeyword] = useState("");
+const SearchBar = ({
+  onSearch,
+  useAssistedSearch = false,
+  searchKeyword = "",
+}) => {
+  const [keyword, setKeyword] = useState(searchKeyword);
   const [isAssistedSearchOn, setIsAssistedSearchOn] =
     useState(useAssistedSearch);
   const [similarWords, setSimilarWords] = useState([]);
 
+  useEffect(() => {
+    setKeyword(searchKeyword);
+  }, [searchKeyword]);
+
   const handleSearch = async () => {
+    console.log("Handling search for:", keyword);
     let searchKeywords = [keyword];
 
     if (isAssistedSearchOn) {
       const fetchedSimilarWords = await fetchSimilarWords(keyword);
-      console.log("Similar words:", fetchedSimilarWords);
+      console.log("Fetched similar words:", fetchedSimilarWords);
       setSimilarWords(fetchedSimilarWords.slice(0, 10));
       searchKeywords = [...searchKeywords, ...fetchedSimilarWords.slice(0, 10)];
     } else {
@@ -19,7 +28,7 @@ const SearchBar = ({ onSearch, useAssistedSearch = false }) => {
     }
 
     console.log("Search keywords:", searchKeywords);
-    onSearch(searchKeywords);
+    onSearch(searchKeywords); // Pass keywords to parent
   };
 
   const handleKeyDown = (e) => {
@@ -32,7 +41,6 @@ const SearchBar = ({ onSearch, useAssistedSearch = false }) => {
     try {
       const response = await fetch(`https://api.datamuse.com/words?ml=${word}`);
       const data = await response.json();
-      console.log("API Response:", data);
       return data.map((item) => item.word);
     } catch (error) {
       console.error("Error fetching similar words:", error);
