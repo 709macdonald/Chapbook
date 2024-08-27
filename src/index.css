@@ -68,8 +68,11 @@
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
   align-items: center;
-  justify-items: center; /* Centers items horizontally in each grid cell */
+  justify-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .fileDisplay {

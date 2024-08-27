@@ -2,33 +2,30 @@ import React, { useState, useEffect } from "react";
 
 const SearchBar = ({
   onSearch,
-  useAssistedSearch = false,
-  searchKeyword = "",
+  searchKeyword,
+  similarWords,
+  setSimilarWords,
+  isAssistedSearchOn,
+  setIsAssistedSearchOn,
 }) => {
   const [keyword, setKeyword] = useState(searchKeyword);
-  const [isAssistedSearchOn, setIsAssistedSearchOn] =
-    useState(useAssistedSearch);
-  const [similarWords, setSimilarWords] = useState([]);
 
   useEffect(() => {
     setKeyword(searchKeyword);
   }, [searchKeyword]);
 
   const handleSearch = async () => {
-    console.log("Handling search for:", keyword);
     let searchKeywords = [keyword];
 
     if (isAssistedSearchOn) {
       const fetchedSimilarWords = await fetchSimilarWords(keyword);
-      console.log("Fetched similar words:", fetchedSimilarWords);
       setSimilarWords(fetchedSimilarWords.slice(0, 10));
       searchKeywords = [...searchKeywords, ...fetchedSimilarWords.slice(0, 10)];
     } else {
       setSimilarWords([]);
     }
 
-    console.log("Search keywords:", searchKeywords);
-    onSearch(searchKeywords); // Pass keywords to parent
+    onSearch(searchKeywords);
   };
 
   const handleKeyDown = (e) => {

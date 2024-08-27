@@ -7,9 +7,31 @@ function App() {
   const [files, setFiles] = useState([]);
   const [filteredFiles, setFilteredFiles] = useState([]);
   const [folderName, setFolderName] = useState("No Folder Selected");
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [resultsCount, setResultsCount] = useState(0);
+  const [similarWords, setSimilarWords] = useState([]);
+  const [isAssistedSearchOn, setIsAssistedSearchOn] = useState(false);
 
   function handleToggleSidebar() {
     setShowSidebar(!showSidebar);
+  }
+
+  function handleSearch(keywords) {
+    setSearchKeyword(keywords[0]);
+    const validFiles = files.map((file) => ({
+      ...file,
+      text: file.text || "",
+    }));
+    const filtered = validFiles.filter((file) =>
+      keywords.some((keyword) =>
+        file.text.toLowerCase().includes(keyword.toLowerCase())
+      )
+    );
+    setResultsCount(filtered.length);
+    setFilteredFiles(filtered);
+    if (filtered.length === 0) {
+      alert("No words found");
+    }
   }
 
   return (
@@ -19,8 +41,13 @@ function App() {
           setFiles={setFiles}
           folderName={folderName}
           setFolderName={setFolderName}
-          files={files}
-          setFilteredFiles={setFilteredFiles}
+          searchKeyword={searchKeyword}
+          resultsCount={resultsCount}
+          similarWords={similarWords}
+          isAssistedSearchOn={isAssistedSearchOn}
+          setIsAssistedSearchOn={setIsAssistedSearchOn}
+          onSearch={handleSearch}
+          setSimilarWords={setSimilarWords}
         />
       )}
       <Main
