@@ -12,19 +12,28 @@ const FileLister = ({ handle, setFiles }) => {
           const file = await entry.getFile();
           const url = URL.createObjectURL(file);
 
-          const pdfText = await extractTextFromPDF(file);
-
-          fileArray.push({
-            name: file.name,
-            url: url,
-            text: pdfText,
-          });
+          try {
+            const pdfText = await extractTextFromPDF(file);
+            fileArray.push({
+              name: file.name,
+              url: url,
+              text: pdfText || "", // Ensure text is never undefined
+            });
+          } catch (error) {
+            alert(`Failed to extract text from PDF file: ${file.name}`);
+            console.error(`Failed to extract text from ${file.name}:`, error);
+            fileArray.push({
+              name: file.name,
+              url: url,
+              text: "", // Set default value if extraction fails
+            });
+          }
         }
       }
       setFiles(fileArray);
 
       if (!hasLogged.current) {
-        console.log(fileArray);
+        console.log("FileArray:", fileArray); // Log here to check the structure
         hasLogged.current = true;
       }
     };
@@ -40,7 +49,7 @@ const FileLister = ({ handle, setFiles }) => {
         .then((text) => resolve(text))
         .catch((error) => {
           console.error("Failed to extract text from PDF:", error);
-          reject("");
+          reject(error); // Pass the error to the catch block in the listFiles function
         });
     });
   };

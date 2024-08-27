@@ -7,12 +7,20 @@ const SearchBar = ({ onSearch }) => {
     onSearch(keyword);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="searchField">
       <input
         type="text"
+        id="searchBar"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
+        onKeyDown={handleKeyDown}
         placeholder="Search for Keywords"
       />
       <button className="searchButton" onClick={handleSearch}>

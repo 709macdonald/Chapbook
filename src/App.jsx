@@ -5,7 +5,8 @@ import Sidebar from "./components/Sidebar";
 function App() {
   const [showSidebar, setShowSidebar] = useState(true);
   const [files, setFiles] = useState([]);
-  const [folderName, setFolderName] = useState("No Folder Selected"); // Manage folderName here
+  const [filteredFiles, setFilteredFiles] = useState([]);
+  const [folderName, setFolderName] = useState("No Folder Selected");
 
   function handleToggleSidebar() {
     setShowSidebar(!showSidebar);
@@ -18,12 +19,14 @@ function App() {
           setFiles={setFiles}
           folderName={folderName}
           setFolderName={setFolderName}
+          files={files}
+          setFilteredFiles={setFilteredFiles}
         />
       )}
       <Main
         showSidebar={showSidebar}
         handleToggleSidebar={handleToggleSidebar}
-        files={files}
+        files={filteredFiles.length > 0 ? filteredFiles : files}
       />
     </>
   );
