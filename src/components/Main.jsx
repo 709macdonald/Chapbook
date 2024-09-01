@@ -1,7 +1,7 @@
 import React from "react";
 import FileList from "./FileList";
 
-export default function Main({ files, handleToggleSidebar }) {
+export default function Main({ files }) {
   return (
     <div className="mainContainer">
       <div className="bgText">
@@ -11,11 +11,6 @@ export default function Main({ files, handleToggleSidebar }) {
       </div>
       <div className="mainScreen">
         <FileList files={files} />
-      </div>
-      <div className="menuIcon">
-        <button onClick={handleToggleSidebar} className="menuButton">
-          <i className="fa-solid fa-bars icon-large"></i>
-        </button>
       </div>
     </div>
   );

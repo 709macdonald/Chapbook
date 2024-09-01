@@ -7,6 +7,7 @@ const FileLister = ({ handle, setFiles }) => {
   useEffect(() => {
     const listFiles = async () => {
       const fileArray = [];
+      console.log(handle.values());
       for await (const entry of handle.values()) {
         if (entry.kind === "file") {
           const file = await entry.getFile();
@@ -17,7 +18,7 @@ const FileLister = ({ handle, setFiles }) => {
             fileArray.push({
               name: file.name,
               url: url,
-              text: pdfText || "", // Ensure text is never undefined
+              text: pdfText || "",
             });
           } catch (error) {
             alert(`Failed to extract text from PDF file: ${file.name}`);
@@ -25,7 +26,7 @@ const FileLister = ({ handle, setFiles }) => {
             fileArray.push({
               name: file.name,
               url: url,
-              text: "", // Set default value if extraction fails
+              text: "",
             });
           }
         }
@@ -33,7 +34,7 @@ const FileLister = ({ handle, setFiles }) => {
       setFiles(fileArray);
 
       if (!hasLogged.current) {
-        console.log("FileArray:", fileArray); // Log here to check the structure
+        console.log("FileArray:", fileArray);
         hasLogged.current = true;
       }
     };
@@ -45,12 +46,7 @@ const FileLister = ({ handle, setFiles }) => {
 
   const extractTextFromPDF = (file) => {
     return new Promise((resolve, reject) => {
-      pdfToText(file)
-        .then((text) => resolve(text))
-        .catch((error) => {
-          console.error("Failed to extract text from PDF:", error);
-          reject(error); // Pass the error to the catch block in the listFiles function
-        });
+      pdfToText(file).then((text) => resolve(text));
     });
   };
 

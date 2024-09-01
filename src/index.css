@@ -99,28 +99,6 @@
   word-wrap: break-word;
 }
 
-/* MENU ICON CSS */
-
-.menuIcon {
-  position: fixed;
-  z-index: 4;
-  padding: 1rem;
-}
-
-.icon-large {
-  font-size: 1.7rem;
-  color: black;
-}
-
-.menuButton {
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  outline: none;
-  cursor: pointer;
-}
-
 /* SIDEBAR CSS */
 
 .sidebarBG {
