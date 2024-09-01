@@ -18,11 +18,21 @@ export default function Main({ files }) {
           {filesWithText.length > 0 ? (
             filesWithText.map((file) => (
               <div key={file.url} className="fileDisplay">
-                <i className="fa-regular fa-file-pdf pdfIcon"></i>
+                {file.url ? (
+                  <iframe
+                    src={file.url}
+                    title={file.name}
+                    style={{ width: "9rem", height: "12rem" }}
+                  ></iframe>
+                ) : (
+                  <i className="fa-regular fa-file-pdf pdfIcon"></i>
+                )}
                 <p className="pdfText">{file.name}</p>
-                <a href={file.url} target="_blank" rel="noopener noreferrer">
-                  View File
-                </a>
+                {file.url && (
+                  <a href={file.url} target="_blank" rel="noopener noreferrer">
+                    View File
+                  </a>
+                )}
               </div>
             ))
           ) : (
