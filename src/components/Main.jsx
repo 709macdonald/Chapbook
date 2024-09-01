@@ -1,6 +1,11 @@
 import React from "react";
 
 export default function Main({ files }) {
+  // Filter out files with empty text
+  const filesWithText = React.useMemo(() => {
+    return files.filter((file) => file.text.trim() !== "");
+  }, [files]);
+
   return (
     <div className="mainContainer">
       <div className="bgText">
@@ -10,9 +15,9 @@ export default function Main({ files }) {
       </div>
       <div className="mainScreen">
         <div className="fileList">
-          {files.length > 0 ? (
-            files.map((file, index) => (
-              <div key={index} className="fileDisplay">
+          {filesWithText.length > 0 ? (
+            filesWithText.map((file) => (
+              <div key={file.url} className="fileDisplay">
                 <i className="fa-regular fa-file-pdf pdfIcon"></i>
                 <p className="pdfText">{file.name}</p>
                 <a href={file.url} target="_blank" rel="noopener noreferrer">
@@ -21,7 +26,7 @@ export default function Main({ files }) {
               </div>
             ))
           ) : (
-            <p>No files to display</p>
+            <p>No files with text to display</p>
           )}
         </div>
       </div>
