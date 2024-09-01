@@ -1,34 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import FileLister from "./FileLister";
 
 const FileManager = ({ setFiles, setFolderName }) => {
-  const [directoryHandle, setDirectoryHandle] = React.useState(null);
+  const [files, setFilesState] = useState([]);
 
-  const openFolder = async () => {
-    if ("showDirectoryPicker" in window) {
-      try {
-        const handle = await window.showDirectoryPicker();
-        setDirectoryHandle(handle);
-        setFolderName(handle.name);
-      } catch (error) {
-        console.error("Error opening folder:", error);
-      }
-    } else {
-      console.error("File System Access API is not supported in this browser.");
+  const handleFileChange = (event) => {
+    const selectedFiles = Array.from(event.target.files);
+    setFilesState(selectedFiles);
+
+    if (selectedFiles.length > 0) {
+      const folderPath = selectedFiles[0].webkitRelativePath
+        ? selectedFiles[0].webkitRelativePath.split("/")[0]
+        : "Selected Files";
+      setFolderName(folderPath);
     }
   };
 
   return (
     <div className="documentSection">
       <div className="documentSectionDiv">
-        <button onClick={openFolder} className="fileButtons">
-          <i className="fa-solid fa-folder-open fileIcon"></i>
-        </button>
-        <label htmlFor="fileDirectory">Choose Folder</label>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          accept="application/pdf"
+          multiple
+          webkitdirectory=""
+          directory=""
+          className="fileInput"
+        />
+        <label htmlFor="fileInput">Choose Folder or Files</label>
       </div>
-      {directoryHandle && (
-        <FileLister handle={directoryHandle} setFiles={setFiles} />
-      )}
+      {files.length > 0 && <FileLister files={files} setFiles={setFiles} />}
     </div>
   );
 };
