@@ -22,21 +22,22 @@
 #root {
   min-height: 100vh;
   position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .mainContainer {
   display: flex;
   flex-direction: column;
+  grid-column: 2 / 5; /* Span from the 2nd to the 4th column */
 }
 
 .bgText {
-  width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   object-fit: cover;
-  position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
@@ -50,11 +51,10 @@
 /* MAINSCREEN CSS */
 
 .mainScreen {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  grid-column: 2 / 5; /* Span from the 2nd to the 4th column */
   position: absolute;
-  top: 0;
-  left: 0;
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -62,7 +62,6 @@
 }
 
 .fileList {
-  width: 100vw;
   height: 100vh;
   position: absolute;
   z-index: 2;
@@ -102,7 +101,7 @@
 /* SIDEBAR CSS */
 
 .sidebarBG {
-  position: absolute;
+  grid-column: 1;
   z-index: 3;
   background-color: rgb(249, 249, 249);
   height: 100vh;
@@ -126,15 +125,37 @@
   cursor: pointer;
 }
 
-.fileIcon {
-  font-size: 1.7rem;
-  color: rgb(93, 93, 93);
-  padding-right: 1rem;
-}
-
 .documentSectionDiv {
   display: flex;
   padding: 0.3rem;
+  align-items: center;
+}
+
+.fileInput {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.fileInputLabel {
+  margin-right: 1rem;
+  cursor: pointer;
+  font-size: 24px;
+  color: #333;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  display: inline-block;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
+}
+
+.fileInputLabel:hover {
+  background-color: #ddd;
+}
+
+.fileInputText {
+  margin-left: 5rem;
 }
 
 .folderName {
@@ -196,4 +217,9 @@ input[type="checkbox"] {
 
 .similarWord {
   margin-left: 1.5rem;
+}
+
+.fileInputWrapper {
+  position: relative;
+  display: inline-block;
 }

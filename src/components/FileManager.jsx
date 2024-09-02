@@ -27,8 +27,14 @@ const FileManager = ({ setFiles, setFolderName }) => {
           webkitdirectory=""
           directory=""
           className="fileInput"
+          id="fileInput"
         />
-        <label htmlFor="fileInput">Choose Folder or Files</label>
+        <label for="fileInput" class="fileInputLabel">
+          <i class="fa-solid fa-folder"></i>
+        </label>
+        <label htmlFor="fileInput" id="fileInputText">
+          Choose Folder or Files
+        </label>
       </div>
       {files.length > 0 && <FileLister files={files} setFiles={setFiles} />}
     </div>
