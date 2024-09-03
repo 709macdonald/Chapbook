@@ -34,6 +34,11 @@ export default function Sidebar({
         />
         <p>Results found: {resultsCount}</p>
       </div>
+      <div className="bgText">
+        <h2>
+          Chap<span className="book">book</span>
+        </h2>
+      </div>
     </div>
   );
 }

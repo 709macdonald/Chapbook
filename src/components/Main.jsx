@@ -50,7 +50,7 @@ export default function Main({ files, isLoadingFiles }) {
                   </div>
                 ))
               ) : (
-                <p>No files with text to display</p>
+                <p className="noFilesDisplay">No files to display</p>
               )}
             </div>
           </div>

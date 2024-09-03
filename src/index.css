@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  grid-column: 2 / 5; /* Span from the 2nd to the 4th column */
+  grid-column: 2 / 5;
 }
 
 .bgText {
@@ -54,12 +54,15 @@
 .mainScreen {
   width: 100%;
   height: 100vh;
-  grid-column: 2 / 5; /* Span from the 2nd to the 4th column */
+  grid-column: 2 / 5;
   position: absolute;
   z-index: 10;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   overflow-y: scroll;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .loadingScreen {
@@ -68,9 +71,9 @@
   align-items: center;
   justify-content: center;
   object-fit: cover;
-  z-index: 20; /* Higher than .bgText */
+  z-index: 20;
   color: rgb(171, 169, 169);
-  position: absolute; /* Position relative to .mainContainer */
+  position: absolute;
 }
 
 @keyframes spin {
@@ -83,8 +86,8 @@
 }
 
 .loadingGear {
-  font-size: 2rem; /* Adjust size as needed */
-  animation: spin 1s linear infinite; /* Adjust duration and timing function as needed */
+  font-size: 2rem;
+  animation: spin 1s linear infinite;
 }
 
 .fileList {
@@ -100,9 +103,17 @@
   margin-bottom: 1rem;
 }
 
+.noFilesDisplay {
+  grid-column: span 4;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  color: rgb(171, 169, 169);
+}
+
 .fileDisplay {
   background-color: rgb(255, 255, 255);
-  border: 2px solid #000000; /* Black border around each file item */
+  border: 2px solid #000000;
   border-radius: 1rem;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   height: 20rem;
