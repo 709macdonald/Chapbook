@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import pdfToText from "react-pdftotext";
+import { extractTextFromPDF } from "../assets/utils/pdfUtils";
+import { extractTextFromImage } from "../assets/utils/imageUtils";
 
 const FileLister = ({ files, setFiles }) => {
   useEffect(() => {
@@ -10,20 +11,23 @@ const FileLister = ({ files, setFiles }) => {
         const url = URL.createObjectURL(file);
 
         try {
-          const pdfText = await extractTextFromPDF(file);
-          const fileData = { name: file.name, url, text: pdfText || "" };
+          let fileData = { name: file.name, url, text: "" };
+
+          if (file.type === "application/pdf") {
+            fileData.text = await extractTextFromPDF(file);
+          } else if (file.type.startsWith("image/")) {
+            fileData.text = await extractTextFromImage(file);
+          }
+
           processedFiles.push(fileData);
         } catch (error) {
-          alert(`Failed to extract text from PDF file: ${file.name}`);
+          alert(`Failed to extract text from file: ${file.name}`);
           console.error(`Failed to extract text from ${file.name}:`, error);
           processedFiles.push({ name: file.name, url, text: "" });
         }
       }
 
-      // Update the state with the final array of processed files
       setFiles(processedFiles);
-
-      // Log the final array of files
       console.log("Final array of files:", processedFiles);
     };
 
@@ -31,14 +35,6 @@ const FileLister = ({ files, setFiles }) => {
       listFiles();
     }
   }, [files, setFiles]);
-
-  const extractTextFromPDF = (file) => {
-    return new Promise((resolve, reject) => {
-      pdfToText(file)
-        .then((text) => resolve(text))
-        .catch(reject);
-    });
-  };
 
   return null;
 };

@@ -29,8 +29,8 @@ const FileManager = ({ setFiles, setFolderName }) => {
           className="fileInput"
           id="fileInput"
         />
-        <label for="fileInput" class="fileInputLabel">
-          <i class="fa-solid fa-folder"></i>
+        <label htmlFor="fileInput" className="fileInputLabel">
+          <i className="fa-solid fa-folder"></i>
         </label>
         <label htmlFor="fileInput" id="fileInputText">
           Choose Folder or Files
