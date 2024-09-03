@@ -34,8 +34,8 @@
     },
     {
       "type": "text",
-      "version": 13,
-      "versionNonce": 1519868877,
+      "version": 14,
+      "versionNonce": 1010379996,
       "isDeleted": false,
       "id": "LkI-lQbNZD_MRTV_11G7-",
       "fillStyle": "solid",
@@ -55,7 +55,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1724775535050,
+      "updated": 1725322008829,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -99,8 +99,8 @@
     },
     {
       "type": "rectangle",
-      "version": 264,
-      "versionNonce": 85742019,
+      "version": 265,
+      "versionNonce": 779413220,
       "isDeleted": false,
       "id": "rQsdl5_fGzp9R_XM0mtNb",
       "fillStyle": "solid",
@@ -109,8 +109,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 801.2399896989017,
-      "y": 159.9969051034521,
+      "x": 801.3571771989017,
+      "y": 160.1219051034521,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 165.41550628713608,
@@ -122,14 +122,14 @@
         "type": 3
       },
       "boundElements": [],
-      "updated": 1725318254773,
+      "updated": 1725327588959,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 276,
-      "versionNonce": 2078861061,
+      "version": 277,
+      "versionNonce": 551657188,
       "isDeleted": false,
       "id": "qBBgNf4_mcKmya4sqZb2Y",
       "fillStyle": "solid",
@@ -149,7 +149,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1724460330213,
+      "updated": 1725322008830,
       "link": null,
       "locked": false,
       "fontSize": 8.719944096260036,
@@ -160,7 +160,7 @@
       "containerId": null,
       "originalText": "Search For Keywords",
       "lineHeight": 1.25,
-      "baseline": 8
+      "baseline": 7
     },
     {
       "type": "rectangle",
@@ -254,7 +254,7 @@
       "containerId": null,
       "originalText": "Choose Folder",
       "lineHeight": 1.25,
-      "baseline": 8
+      "baseline": 9
     },
     {
       "type": "text",
@@ -290,7 +290,7 @@
       "containerId": null,
       "originalText": "No Folder Selected",
       "lineHeight": 1.25,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "line",
@@ -426,8 +426,8 @@
     },
     {
       "type": "text",
-      "version": 125,
-      "versionNonce": 1919061133,
+      "version": 126,
+      "versionNonce": 246886748,
       "isDeleted": false,
       "id": "D7sbLsxlrIKfXyns5EdKg",
       "fillStyle": "solid",
@@ -447,7 +447,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1724775535051,
+      "updated": 1725322008831,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -668,7 +668,7 @@
       "containerId": null,
       "originalText": "PDF PREVIEW",
       "lineHeight": 1.25,
-      "baseline": 5
+      "baseline": 6
     },
     {
       "type": "text",
@@ -704,7 +704,7 @@
       "containerId": null,
       "originalText": "PDF PREVIEW",
       "lineHeight": 1.25,
-      "baseline": 5
+      "baseline": 6
     },
     {
       "type": "text",
@@ -740,7 +740,7 @@
       "containerId": null,
       "originalText": "PDF PREVIEW",
       "lineHeight": 1.25,
-      "baseline": 5
+      "baseline": 6
     },
     {
       "type": "text",
@@ -776,12 +776,12 @@
       "containerId": null,
       "originalText": "PDF PREVIEW",
       "lineHeight": 1.25,
-      "baseline": 5
+      "baseline": 6
     },
     {
       "type": "text",
-      "version": 136,
-      "versionNonce": 1609994691,
+      "version": 137,
+      "versionNonce": 1083449956,
       "isDeleted": false,
       "id": "me1Mx-EcefqopMxCO9Pam",
       "fillStyle": "solid",
@@ -801,7 +801,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1724686894609,
+      "updated": 1725322008831,
       "link": null,
       "locked": false,
       "fontSize": 8.980046879826928,
@@ -816,8 +816,8 @@
     },
     {
       "type": "text",
-      "version": 196,
-      "versionNonce": 767991789,
+      "version": 197,
+      "versionNonce": 1543546332,
       "isDeleted": false,
       "id": "mA2Ti-25uoe7JfcMrSfud",
       "fillStyle": "solid",
@@ -837,7 +837,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1724686894609,
+      "updated": 1725322008832,
       "link": null,
       "locked": false,
       "fontSize": 8.980046879826928,
@@ -852,8 +852,8 @@
     },
     {
       "type": "text",
-      "version": 300,
-      "versionNonce": 1868915043,
+      "version": 301,
+      "versionNonce": 1579824612,
       "isDeleted": false,
       "id": "AnEVZSLYtsR3bhX5D6_N6",
       "fillStyle": "solid",
@@ -873,7 +873,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1724686894609,
+      "updated": 1725322008832,
       "link": null,
       "locked": false,
       "fontSize": 8.980046879826928,
@@ -888,8 +888,8 @@
     },
     {
       "type": "text",
-      "version": 383,
-      "versionNonce": 757471821,
+      "version": 384,
+      "versionNonce": 422021724,
       "isDeleted": false,
       "id": "pDSRjTzC-ga1QoyYQAZad",
       "fillStyle": "solid",
@@ -909,7 +909,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1724686894609,
+      "updated": 1725322008832,
       "link": null,
       "locked": false,
       "fontSize": 8.980046879826928,
@@ -923,40 +923,40 @@
       "baseline": 8
     },
     {
-      "id": "207Lf7NPccRFCBfORGqWM",
       "type": "text",
-      "x": 383.1725847253838,
-      "y": 213.78599265312835,
-      "width": 324.2996826171875,
-      "height": 175,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
+      "version": 1361,
+      "versionNonce": 1274047844,
+      "isDeleted": false,
+      "id": "207Lf7NPccRFCBfORGqWM",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
+      "angle": 0,
+      "x": 383.74958551622535,
+      "y": 211.93334743634603,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 331.83197021484375,
+      "height": 293.8220646670938,
+      "seed": 1686745635,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 1686745635,
-      "version": 584,
-      "versionNonce": 1744905539,
-      "isDeleted": false,
-      "boundElements": null,
-      "updated": 1725319932257,
+      "boundElements": [],
+      "updated": 1725327662548,
       "link": null,
       "locked": false,
-      "text": "\n-Select multiple files individually \n-Loading screen for file selection\n-Ad AI for image reading\n-show where text is in the pdf?\n-update results found on input\n",
-      "fontSize": 20,
+      "fontSize": 14.69110323335469,
       "fontFamily": 1,
+      "text": "\n-Select multiple files individually \n-show where text is in the pdf?\n-rstyle \"no files with text to display\"\n-Add ChapBook to the sidebar. \n-Results found should update right away.\n-Add built by Peter MacDonald\n-Add Word document recognition \n-Add icon for images instead of just pdf\n-Edit PDF's with a marker when you click view\n-Restlye file divs\n-add text to load screen\n-style loadscreen (bigger cog, dots flash)\n-Reset file array\n-Add more than one input at a time\n",
       "textAlign": "left",
       "verticalAlign": "top",
-      "baseline": 168,
       "containerId": null,
-      "originalText": "\n-Select multiple files individually \n-Loading screen for file selection\n-Ad AI for image reading\n-show where text is in the pdf?\n-update results found on input\n",
-      "lineHeight": 1.25
+      "originalText": "\n-Select multiple files individually \n-show where text is in the pdf?\n-rstyle \"no files with text to display\"\n-Add ChapBook to the sidebar. \n-Results found should update right away.\n-Add built by Peter MacDonald\n-Add Word document recognition \n-Add icon for images instead of just pdf\n-Edit PDF's with a marker when you click view\n-Restlye file divs\n-add text to load screen\n-style loadscreen (bigger cog, dots flash)\n-Reset file array\n-Add more than one input at a time\n",
+      "lineHeight": 1.25,
+      "baseline": 288
     }
   ],
   "appState": {
