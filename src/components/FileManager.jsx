@@ -6,7 +6,7 @@ const FileManager = ({ setFiles, setFolderName, setIsLoadingFiles }) => {
 
   const handleFileChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
-    setFilesState((prevFiles) => [...prevFiles, ...selectedFiles]); // Accumulate files
+    setFilesState((prevFiles) => [...prevFiles, ...selectedFiles]);
 
     if (selectedFiles.length > 0) {
       const folderPath = selectedFiles[0].webkitRelativePath
@@ -16,14 +16,26 @@ const FileManager = ({ setFiles, setFolderName, setIsLoadingFiles }) => {
     }
   };
 
+  const handleReset = () => {
+    const confirmReset = window.confirm(
+      "Are you sure you want to clear all files from Chapbook's library?"
+    );
+
+    if (confirmReset) {
+      setFilesState([]);
+      setFiles([]);
+      setFolderName("");
+      setIsLoadingFiles(false);
+    }
+  };
+
   return (
     <div className="documentSection">
       <div className="documentSectionDiv">
-        {/* Input for selecting individual files (PDFs and images) */}
         <input
           type="file"
           onChange={handleFileChange}
-          accept="application/pdf, image/*" // Accept PDFs and all image types
+          accept="application/pdf, image/*"
           multiple
           className="fileInput"
           id="fileInputFiles"
@@ -32,17 +44,19 @@ const FileManager = ({ setFiles, setFolderName, setIsLoadingFiles }) => {
           <i className="fa-solid fa-file"></i> Select Files
         </label>
 
-        {/* Input for selecting directories */}
         <input
           type="file"
           onChange={handleFileChange}
-          webkitdirectory="" // Allows folder selection
+          webkitdirectory=""
           className="fileInput"
           id="fileInputDirectory"
         />
         <label htmlFor="fileInputDirectory" className="fileInputLabel">
           <i className="fa-solid fa-folder"></i> Select Folder
         </label>
+        <button onClick={handleReset} className="resetButton">
+          Reset
+        </button>
       </div>
       {files.length > 0 && (
         <FileLister

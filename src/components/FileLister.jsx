@@ -5,7 +5,6 @@ import { extractTextFromImage } from "../assets/utils/imageUtils";
 const FileLister = ({ files, setFiles, setIsLoadingFiles }) => {
   useEffect(() => {
     const listFiles = async () => {
-      // Start loading
       setIsLoadingFiles(true);
 
       const processedFiles = [];
@@ -33,7 +32,6 @@ const FileLister = ({ files, setFiles, setIsLoadingFiles }) => {
       setFiles(processedFiles);
       console.log("Final array of files:", processedFiles);
 
-      // Done loading
       setIsLoadingFiles(false);
     };
 
