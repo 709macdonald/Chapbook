@@ -32,21 +32,32 @@ export default function Main({ files, isLoadingFiles }) {
                     ) : (
                       <i className="fa-regular fa-file-pdf pdfIcon"></i>
                     )}
-                    <p className="pdfText">{file.name}</p>
-                    <p className="matchedWords">
-                      {file.matchedWords.length > 0
-                        ? `Matched Words: ${file.matchedWords.join(", ")}`
-                        : "No words found"}
-                    </p>
-                    {file.url && (
-                      <a
-                        href={file.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        View File
-                      </a>
-                    )}
+                    <div className="fileDisplayText">
+                      <p className="pdfText">{file.name}</p>
+                      <p className="matchedWords">
+                        {file.matchedWords.length > 0 ? (
+                          <>
+                            Found:{" "}
+                            <span className="showMatchedWords">
+                              {file.matchedWords.join(", ")}
+                            </span>
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </p>
+
+                      {file.url && (
+                        <a
+                          href={file.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="fileView"
+                        >
+                          View File
+                        </a>
+                      )}
+                    </div>
                   </div>
                 ))
               ) : (

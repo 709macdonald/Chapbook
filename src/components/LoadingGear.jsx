@@ -6,7 +6,7 @@ function LoadingGear({ isVisible }) {
   return (
     <div className="loadingScreen">
       <i className="fa-solid fa-gear loadingGear"></i>
-      <p>Loading your documents...</p>
+      <p className="loadingText">Loading your documents...</p>
     </div>
   );
 }

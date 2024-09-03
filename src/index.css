@@ -22,15 +22,20 @@
 #root {
   min-height: 100vh;
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
+/* MAINSCREEN CSS */
 .mainContainer {
   display: flex;
+  width: 83%;
   flex-direction: column;
   align-items: center;
   grid-column: 2 / 5;
+  padding: 0;
+  margin: 0;
 }
 
 .bgText {
@@ -49,10 +54,8 @@
   color: rgba(84, 84, 84, 0.87);
 }
 
-/* MAINSCREEN CSS */
-
 .mainScreen {
-  width: 100%;
+  width: 83%;
   height: 100vh;
   grid-column: 2 / 5;
   position: absolute;
@@ -66,7 +69,6 @@
 }
 
 .loadingScreen {
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,17 +92,22 @@
   animation: spin 1s linear infinite;
 }
 
+.loadingText {
+  margin-left: 1rem;
+}
+
 .fileList {
-  height: 100vh;
   position: absolute;
   z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  align-items: center;
-  justify-items: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .noFilesDisplay {
@@ -113,15 +120,15 @@
 
 .fileDisplay {
   background-color: rgb(255, 255, 255);
-  border: 2px solid #000000;
+  border: 0 solid #000000;
   border-radius: 1rem;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
-  height: 20rem;
-  width: 15rem;
+  height: 14rem;
+  width: 20rem;
   display: flex;
-  flex-direction: column;
+  padding: 1rem;
   align-items: center;
-  justify-content: center;
+  margin: 1rem;
 }
 
 .pdfIcon {
@@ -129,10 +136,24 @@
   color: rgb(64, 64, 64);
 }
 
-.pdfText {
-  text-align: center;
+.fileDisplayText {
   padding: 1rem;
+}
+
+.pdfText {
   word-wrap: break-word;
+}
+
+.matchedWords {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  color: rgb(171, 169, 169);
+  font-style: italic;
+}
+
+.fileView {
+  margin-top: 5rem;
+  color: rgb(61, 61, 61);
 }
 
 /* SIDEBAR CSS */
@@ -142,7 +163,7 @@
   z-index: 3;
   background-color: rgb(249, 249, 249);
   height: 100vh;
-  width: 20rem;
+  width: 17%;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -259,4 +280,17 @@ input[type="checkbox"] {
 .fileInputWrapper {
   position: relative;
   display: inline-block;
+}
+
+.sideBarLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
+  position: absolute;
+  bottom: 0;
+  margin-left: 5%;
+  margin-bottom: 1rem;
+  z-index: 1;
+  color: rgb(171, 169, 169);
 }
