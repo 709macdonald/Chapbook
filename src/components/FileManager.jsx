@@ -6,7 +6,7 @@ const FileManager = ({ setFiles, setFolderName, setIsLoadingFiles }) => {
 
   const handleFileChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
-    setFilesState(selectedFiles);
+    setFilesState((prevFiles) => [...prevFiles, ...selectedFiles]); // Accumulate files
 
     if (selectedFiles.length > 0) {
       const folderPath = selectedFiles[0].webkitRelativePath
@@ -19,21 +19,29 @@ const FileManager = ({ setFiles, setFolderName, setIsLoadingFiles }) => {
   return (
     <div className="documentSection">
       <div className="documentSectionDiv">
+        {/* Input for selecting individual files (PDFs and images) */}
         <input
           type="file"
           onChange={handleFileChange}
-          accept="application/pdf"
+          accept="application/pdf, image/*" // Accept PDFs and all image types
           multiple
-          webkitdirectory=""
-          directory=""
           className="fileInput"
-          id="fileInput"
+          id="fileInputFiles"
         />
-        <label htmlFor="fileInput" className="fileInputLabel">
-          <i className="fa-solid fa-folder"></i>
+        <label htmlFor="fileInputFiles" className="fileInputLabel">
+          <i className="fa-solid fa-file"></i> Select Files
         </label>
-        <label htmlFor="fileInput" id="fileInputText">
-          Choose Folder or Files
+
+        {/* Input for selecting directories */}
+        <input
+          type="file"
+          onChange={handleFileChange}
+          webkitdirectory="" // Allows folder selection
+          className="fileInput"
+          id="fileInputDirectory"
+        />
+        <label htmlFor="fileInputDirectory" className="fileInputLabel">
+          <i className="fa-solid fa-folder"></i> Select Folder
         </label>
       </div>
       {files.length > 0 && (

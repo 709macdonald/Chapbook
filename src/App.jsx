@@ -30,6 +30,11 @@ function App() {
     }
   }
 
+  // Update results count when files array changes
+  useEffect(() => {
+    setResultsCount(files.length);
+  }, [files]);
+
   useEffect(() => {
     if (isLoadingFiles) {
       console.log("Loading files...");
