@@ -29,6 +29,7 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
   grid-column: 2 / 5; /* Span from the 2nd to the 4th column */
 }
 
@@ -55,10 +56,35 @@
   height: 100vh;
   grid-column: 2 / 5; /* Span from the 2nd to the 4th column */
   position: absolute;
-  z-index: 2;
+  z-index: 10;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   overflow-y: scroll;
+}
+
+.loadingScreen {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
+  z-index: 20; /* Higher than .bgText */
+  color: rgb(171, 169, 169);
+  position: absolute; /* Position relative to .mainContainer */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingGear {
+  font-size: 2rem; /* Adjust size as needed */
+  animation: spin 1s linear infinite; /* Adjust duration and timing function as needed */
 }
 
 .fileList {

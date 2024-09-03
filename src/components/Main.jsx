@@ -1,7 +1,7 @@
 import React from "react";
+import LoadingGear from "./LoadingGear";
 
-export default function Main({ files }) {
-  // Filter out files with empty text
+export default function Main({ files, isLoading }) {
   const filesWithText = React.useMemo(() => {
     return files.filter((file) => file.text.trim() !== "");
   }, [files]);
@@ -13,6 +13,7 @@ export default function Main({ files }) {
           Chap<span className="book">book</span>
         </h2>
       </div>
+      <LoadingGear isVisible={isLoading} />
       <div className="mainScreen">
         <div className="fileList">
           {filesWithText.length > 0 ? (
