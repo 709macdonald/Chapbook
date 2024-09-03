@@ -13,11 +13,16 @@ export default function Sidebar({
   setIsAssistedSearchOn,
   onSearch,
   setSimilarWords,
+  setIsLoadingFiles,
 }) {
   return (
     <div className="sidebarBG">
       <div className="searchParameters">
-        <FileManager setFiles={setFiles} setFolderName={setFolderName} />
+        <FileManager
+          setFiles={setFiles}
+          setFolderName={setFolderName}
+          setIsLoadingFiles={setIsLoadingFiles}
+        />
         <p className="folderName">{folderName}</p>
         <SearchBar
           onSearch={onSearch}

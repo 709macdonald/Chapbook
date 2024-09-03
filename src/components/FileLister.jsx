@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import { extractTextFromPDF } from "../assets/utils/pdfUtils";
 import { extractTextFromImage } from "../assets/utils/imageUtils";
 
-const FileLister = ({ files, setFiles }) => {
+const FileLister = ({ files, setFiles, setIsLoadingFiles }) => {
   useEffect(() => {
     const listFiles = async () => {
+      // Start loading
+      setIsLoadingFiles(true);
+
       const processedFiles = [];
 
       for (const file of files) {
@@ -29,12 +32,15 @@ const FileLister = ({ files, setFiles }) => {
 
       setFiles(processedFiles);
       console.log("Final array of files:", processedFiles);
+
+      // Done loading
+      setIsLoadingFiles(false);
     };
 
     if (files && files.length > 0) {
       listFiles();
     }
-  }, [files, setFiles]);
+  }, [files, setFiles, setIsLoadingFiles]);
 
   return null;
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FileLister from "./FileLister";
 
-const FileManager = ({ setFiles, setFolderName }) => {
+const FileManager = ({ setFiles, setFolderName, setIsLoadingFiles }) => {
   const [files, setFilesState] = useState([]);
 
   const handleFileChange = (event) => {
@@ -36,7 +36,13 @@ const FileManager = ({ setFiles, setFolderName }) => {
           Choose Folder or Files
         </label>
       </div>
-      {files.length > 0 && <FileLister files={files} setFiles={setFiles} />}
+      {files.length > 0 && (
+        <FileLister
+          files={files}
+          setFiles={setFiles}
+          setIsLoadingFiles={setIsLoadingFiles}
+        />
+      )}
     </div>
   );
 };

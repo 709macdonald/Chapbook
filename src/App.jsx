@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Main from "./components/Main";
 import Sidebar from "./components/Sidebar";
 
@@ -10,6 +10,7 @@ function App() {
   const [resultsCount, setResultsCount] = useState(0);
   const [similarWords, setSimilarWords] = useState([]);
   const [isAssistedSearchOn, setIsAssistedSearchOn] = useState(false);
+  const [isLoadingFiles, setIsLoadingFiles] = useState(false);
 
   function handleSearch(keywords) {
     setSearchKeyword(keywords[0]);
@@ -29,6 +30,14 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    if (isLoadingFiles) {
+      console.log("Loading files...");
+    } else {
+      console.log("Not loading files.");
+    }
+  }, [isLoadingFiles]);
+
   return (
     <>
       <Sidebar
@@ -42,8 +51,12 @@ function App() {
         setIsAssistedSearchOn={setIsAssistedSearchOn}
         onSearch={handleSearch}
         setSimilarWords={setSimilarWords}
+        setIsLoadingFiles={setIsLoadingFiles}
       />
-      <Main files={filteredFiles.length > 0 ? filteredFiles : files} />
+      <Main
+        files={filteredFiles.length > 0 ? filteredFiles : files}
+        isLoadingFiles={isLoadingFiles}
+      />
     </>
   );
 }
