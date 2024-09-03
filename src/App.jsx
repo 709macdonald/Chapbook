@@ -17,6 +17,9 @@ function App() {
     const validFiles = files.map((file) => ({
       ...file,
       text: file.text || "",
+      matchedWords: keywords.filter((keyword) =>
+        file.text.toLowerCase().includes(keyword.toLowerCase())
+      ),
     }));
     const filtered = validFiles.filter((file) =>
       keywords.some((keyword) =>

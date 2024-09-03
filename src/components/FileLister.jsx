@@ -13,7 +13,7 @@ const FileLister = ({ files, setFiles, setIsLoadingFiles }) => {
         const url = URL.createObjectURL(file);
 
         try {
-          let fileData = { name: file.name, url, text: "" };
+          let fileData = { name: file.name, url, text: "", matchedWords: [] };
 
           if (file.type === "application/pdf") {
             fileData.text = await extractTextFromPDF(file);

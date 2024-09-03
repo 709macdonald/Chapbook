@@ -33,6 +33,11 @@ export default function Main({ files, isLoadingFiles }) {
                       <i className="fa-regular fa-file-pdf pdfIcon"></i>
                     )}
                     <p className="pdfText">{file.name}</p>
+                    <p className="matchedWords">
+                      {file.matchedWords.length > 0
+                        ? `Matched Words: ${file.matchedWords.join(", ")}`
+                        : "No words found"}
+                    </p>
                     {file.url && (
                       <a
                         href={file.url}
