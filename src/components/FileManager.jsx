@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FileLister from "./FileLister";
+import { processFiles } from "../assets/utils/fileUtils";
 
 const FileManager = ({
   setFiles,
@@ -9,7 +9,7 @@ const FileManager = ({
 }) => {
   const [files, setFilesState] = useState([]);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const selectedFiles = Array.from(event.target.files);
     setFilesState((prevFiles) => [...prevFiles, ...selectedFiles]);
 
@@ -18,6 +18,13 @@ const FileManager = ({
         ? selectedFiles[0].webkitRelativePath.split("/")[0]
         : "Selected Files";
       setFolderName(folderPath);
+    }
+
+    if (selectedFiles.length > 0) {
+      setIsLoadingFiles(true);
+      const processedFiles = await processFiles(selectedFiles);
+      setFiles(processedFiles);
+      setIsLoadingFiles(false);
     }
   };
 
@@ -64,13 +71,6 @@ const FileManager = ({
           Reset
         </button>
       </div>
-      {files.length > 0 && (
-        <FileLister
-          files={files}
-          setFiles={setFiles}
-          setIsLoadingFiles={setIsLoadingFiles}
-        />
-      )}
     </div>
   );
 };
