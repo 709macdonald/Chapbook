@@ -1,5 +1,6 @@
 import React from "react";
 import LoadingGear from "./LoadingGear";
+import PDFRenderer from "./PDFRenderer";
 
 export default function Main({ files, isLoadingFiles }) {
   const filesWithText = React.useMemo(() => {
@@ -8,6 +9,8 @@ export default function Main({ files, isLoadingFiles }) {
 
   const isPdf = (file) => file.type === "application/pdf";
   const isImage = (file) => file.type.startsWith("image/");
+
+  console.log(files);
 
   return (
     <div className="mainContainer">
@@ -31,7 +34,7 @@ export default function Main({ files, isLoadingFiles }) {
                         src={file.url}
                         title={file.name}
                         style={{ width: "9rem", height: "12rem" }}
-                        onError={(e) => (e.target.style.display = "none")} // Hide iframe if there's an error
+                        onError={(e) => (e.target.style.display = "none")}
                       ></iframe>
                     ) : isPdf(file) ? (
                       <i className="fa-regular fa-file-pdf pdfIcon"></i>
@@ -65,6 +68,8 @@ export default function Main({ files, isLoadingFiles }) {
                           View File
                         </a>
                       )}
+                      {/* Render PDFRenderer component */}
+                      {/* isPdf(file) && <PDFRenderer file={file} /> */}
                     </div>
                   </div>
                 ))
