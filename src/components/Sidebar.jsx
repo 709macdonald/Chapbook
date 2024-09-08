@@ -22,8 +22,8 @@ export default function Sidebar({
           setFiles={setFiles}
           setFolderName={setFolderName}
           setIsLoadingFiles={setIsLoadingFiles}
+          folderName={folderName}
         />
-        <p className="folderName">{folderName}</p>
         <SearchBar
           onSearch={onSearch}
           searchKeyword={searchKeyword}

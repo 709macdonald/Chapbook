@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import FileLister from "./FileLister";
 
-const FileManager = ({ setFiles, setFolderName, setIsLoadingFiles }) => {
+const FileManager = ({
+  setFiles,
+  setFolderName,
+  setIsLoadingFiles,
+  folderName,
+}) => {
   const [files, setFilesState] = useState([]);
 
   const handleFileChange = (event) => {
@@ -41,7 +46,7 @@ const FileManager = ({ setFiles, setFolderName, setIsLoadingFiles }) => {
           id="fileInputFiles"
         />
         <label htmlFor="fileInputFiles" className="fileInputLabel">
-          <i className="fa-solid fa-file"></i> Select Files
+          <i className="fa-solid fa-file folderIcon"></i> Select Files
         </label>
 
         <input
@@ -52,8 +57,9 @@ const FileManager = ({ setFiles, setFolderName, setIsLoadingFiles }) => {
           id="fileInputDirectory"
         />
         <label htmlFor="fileInputDirectory" className="fileInputLabel">
-          <i className="fa-solid fa-folder"></i> Select Folder
+          <i className="fa-solid fa-folder folderIcon"></i> Select Folder
         </label>
+        <p className="folderName">{folderName}</p>
         <button onClick={handleReset} className="resetButton">
           Reset
         </button>

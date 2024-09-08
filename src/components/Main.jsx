@@ -6,6 +6,9 @@ export default function Main({ files, isLoadingFiles }) {
     return files.filter((file) => file.text.trim() !== "");
   }, [files]);
 
+  const isPdf = (file) => file.type === "application/pdf";
+  const isImage = (file) => file.type.startsWith("image/");
+
   return (
     <div className="mainContainer">
       {/* Show LoadingGear if isLoadingFiles is true */}
@@ -28,9 +31,14 @@ export default function Main({ files, isLoadingFiles }) {
                         src={file.url}
                         title={file.name}
                         style={{ width: "9rem", height: "12rem" }}
+                        onError={(e) => (e.target.style.display = "none")} // Hide iframe if there's an error
                       ></iframe>
-                    ) : (
+                    ) : isPdf(file) ? (
                       <i className="fa-regular fa-file-pdf pdfIcon"></i>
+                    ) : isImage(file) ? (
+                      <i className="fa-regular fa-file-image imageIcon"></i>
+                    ) : (
+                      <i className="fa-regular fa-file"></i>
                     )}
                     <div className="fileDisplayText">
                       <p className="pdfText">{file.name}</p>
