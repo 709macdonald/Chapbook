@@ -14,26 +14,41 @@ function App() {
 
   function handleSearch(keywords) {
     setSearchKeyword(keywords[0]);
-    const validFiles = files.map((file) => ({
-      ...file,
-      text: file.text || "",
-      matchedWords: keywords.filter((keyword) =>
-        file.text.toLowerCase().includes(keyword.toLowerCase())
-      ),
-    }));
+
+    const lowerCaseKeywords = keywords.map((keyword) => keyword.toLowerCase());
+
+    const validFiles = files.map((file) => {
+      const fileText = (file.text || "").toLowerCase();
+      const fileName = (file.name || "").toLowerCase();
+
+      const matchedWords = lowerCaseKeywords.filter(
+        (keyword) => fileText.includes(keyword) || fileName.includes(keyword)
+      );
+
+      return {
+        ...file,
+        text: file.text || "",
+        name: file.name || "",
+        matchedWords,
+      };
+    });
+
     const filtered = validFiles.filter((file) =>
-      keywords.some((keyword) =>
-        file.text.toLowerCase().includes(keyword.toLowerCase())
+      lowerCaseKeywords.some(
+        (keyword) => file.text.includes(keyword) || file.name.includes(keyword)
       )
     );
+
+    console.log("Filtered Files:", filtered);
+
     setResultsCount(filtered.length);
     setFilteredFiles(filtered);
+
     if (filtered.length === 0) {
       alert("No words found");
     }
   }
 
-  // Update results count when files array changes
   useEffect(() => {
     setResultsCount(files.length);
   }, [files]);
