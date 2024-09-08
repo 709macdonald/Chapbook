@@ -13,7 +13,13 @@ const FileLister = ({ files, setFiles, setIsLoadingFiles }) => {
         const url = URL.createObjectURL(file);
 
         try {
-          let fileData = { name: file.name, url, text: "", matchedWords: [] };
+          let fileData = {
+            name: file.name,
+            url,
+            type: file.type, // Add the 'type' field here
+            text: "",
+            matchedWords: [],
+          };
 
           if (file.type === "application/pdf") {
             fileData.text = await extractTextFromPDF(file);
@@ -25,7 +31,12 @@ const FileLister = ({ files, setFiles, setIsLoadingFiles }) => {
         } catch (error) {
           alert(`Failed to extract text from file: ${file.name}`);
           console.error(`Failed to extract text from ${file.name}:`, error);
-          processedFiles.push({ name: file.name, url, text: "" });
+          processedFiles.push({
+            name: file.name,
+            url,
+            type: file.type,
+            text: "",
+          });
         }
       }
 
