@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LoadingGear from "./LoadingGear";
 import PDFRenderer from "./PDFRenderer";
 
@@ -9,12 +9,18 @@ export default function Main({ files, isLoadingFiles }) {
 
   const isPdf = (file) => file.type === "application/pdf";
   const isImage = (file) => file.type.startsWith("image/");
+  const isWordDoc = (file) =>
+    file.type ===
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-  console.log(files);
+  const [renderErrors, setRenderErrors] = useState({});
+
+  const handleRenderError = (fileUrl) => {
+    setRenderErrors((prev) => ({ ...prev, [fileUrl]: true }));
+  };
 
   return (
     <div className="mainContainer">
-      {/* Show LoadingGear if isLoadingFiles is true */}
       {isLoadingFiles ? (
         <LoadingGear isVisible={true} />
       ) : (
@@ -29,19 +35,32 @@ export default function Main({ files, isLoadingFiles }) {
               {filesWithText.length > 0 ? (
                 filesWithText.map((file) => (
                   <div key={file.url} className="fileDisplay">
-                    {file.url ? (
-                      <iframe
-                        src={file.url}
-                        title={file.name}
-                        style={{ width: "9rem", height: "12rem" }}
-                        onError={(e) => (e.target.style.display = "none")}
-                      ></iframe>
-                    ) : isPdf(file) ? (
-                      <i className="fa-regular fa-file-pdf pdfIcon"></i>
+                    {isPdf(file) ? (
+                      !renderErrors[file.url] ? (
+                        <iframe
+                          src={file.url}
+                          title={file.name}
+                          style={{ width: "9rem", height: "12rem" }}
+                          onError={() => handleRenderError(file.url)}
+                        ></iframe>
+                      ) : (
+                        <i className="fa-regular fa-file-pdf pdfIcon"></i>
+                      )
                     ) : isImage(file) ? (
-                      <i className="fa-regular fa-file-image imageIcon"></i>
+                      !renderErrors[file.url] ? (
+                        <img
+                          src={file.url}
+                          alt={file.name}
+                          style={{ width: "9rem", height: "12rem" }}
+                          onError={() => handleRenderError(file.url)}
+                        />
+                      ) : (
+                        <i className="fa-regular fa-file-image imageIcon"></i>
+                      )
+                    ) : isWordDoc(file) ? (
+                      <i className="fa-regular fa-file-word wordIcon"></i>
                     ) : (
-                      <i className="fa-regular fa-file"></i>
+                      <i className="fa-regular fa-file wordIcon"></i>
                     )}
                     <div className="fileDisplayText">
                       <p className="pdfText">{file.name}</p>
@@ -57,8 +76,7 @@ export default function Main({ files, isLoadingFiles }) {
                           ""
                         )}
                       </p>
-
-                      {file.url && (
+                      {isPdf(file) || isImage(file) ? (
                         <a
                           href={file.url}
                           target="_blank"
@@ -67,9 +85,15 @@ export default function Main({ files, isLoadingFiles }) {
                         >
                           View File
                         </a>
-                      )}
-                      {/* Render PDFRenderer component */}
-                      {/* isPdf(file) && <PDFRenderer file={file} /> */}
+                      ) : isWordDoc(file) ? (
+                        <a
+                          href={file.url}
+                          download={file.name} // Enable download with correct file name
+                          className="fileView"
+                        >
+                          Download File
+                        </a>
+                      ) : null}
                     </div>
                   </div>
                 ))
@@ -78,6 +102,7 @@ export default function Main({ files, isLoadingFiles }) {
               )}
             </div>
           </div>
+          r
         </>
       )}
     </div>

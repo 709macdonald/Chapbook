@@ -6,12 +6,12 @@ export const processFiles = async (files) => {
   const processedFiles = [];
 
   for (const file of files) {
-    const url = URL.createObjectURL(file);
+    const url = URL.createObjectURL(file); // Keep the blob URL for later viewing
 
     try {
       let fileData = {
         name: file.name,
-        url,
+        url, // Store the blob URL but don't trigger downloads
         type: file.type,
         fileObject: file,
         text: "",
@@ -35,7 +35,7 @@ export const processFiles = async (files) => {
       console.error(`Failed to extract text from ${file.name}:`, error);
       processedFiles.push({
         name: file.name,
-        url,
+        url, // Still store the URL even on failure
         type: file.type,
         fileObject: file,
         text: "",
@@ -44,6 +44,5 @@ export const processFiles = async (files) => {
   }
 
   console.log(processedFiles);
-
   return processedFiles;
 };

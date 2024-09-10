@@ -139,7 +139,9 @@
   margin: 1rem;
 }
 
-.pdfIcon {
+.pdfIcon,
+.imageIcon,
+.wordIcon {
   font-size: 10rem;
   color: rgb(64, 64, 64);
 }
