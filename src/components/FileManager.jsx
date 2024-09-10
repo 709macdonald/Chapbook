@@ -47,7 +47,7 @@ const FileManager = ({
       <input
         type="file"
         onChange={handleFileChange}
-        accept="application/pdf, image/*"
+        accept="application/pdf, image/*, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword"
         multiple
         className="fileInput"
         id="fileInputFiles"
