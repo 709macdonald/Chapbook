@@ -173,6 +173,20 @@
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
+.sideBarLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(171, 169, 169);
+  margin-top: 1.6rem;
+}
+
+.searchParameters {
+  margin-top: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .fileButtons {
   background: transparent;
   border: none;
@@ -242,11 +256,11 @@
   border-radius: 1rem;
   padding: 0.4rem;
 }
-
-.searchParameters {
-  margin-top: 4rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+.resultsFound {
+  margin-top: 0.2rem;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 .searchField {
@@ -307,17 +321,4 @@ input[type="checkbox"] {
 .fileInputWrapper {
   position: relative;
   display: inline-block;
-}
-
-.sideBarLogo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  object-fit: cover;
-  position: absolute;
-  bottom: 0;
-  margin-left: 5%;
-  margin-bottom: 1rem;
-  z-index: 1;
-  color: rgb(171, 169, 169);
 }

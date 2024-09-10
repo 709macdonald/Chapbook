@@ -17,6 +17,11 @@ export default function Sidebar({
 }) {
   return (
     <div className="sidebarBG">
+      <div className="sideBarLogo">
+        <h2>
+          Chap<span className="book">book</span>
+        </h2>
+      </div>
       <div className="searchParameters">
         <FileManager
           setFiles={setFiles}
@@ -24,6 +29,8 @@ export default function Sidebar({
           setIsLoadingFiles={setIsLoadingFiles}
           folderName={folderName}
         />
+        <p className="resultsFound">Results found: {resultsCount}</p>
+
         <SearchBar
           onSearch={onSearch}
           searchKeyword={searchKeyword}
@@ -32,12 +39,6 @@ export default function Sidebar({
           isAssistedSearchOn={isAssistedSearchOn}
           setIsAssistedSearchOn={setIsAssistedSearchOn}
         />
-        <p>Results found: {resultsCount}</p>
-      </div>
-      <div className="sideBarLogo">
-        <h2>
-          Chap<span className="book">book</span>
-        </h2>
       </div>
     </div>
   );
