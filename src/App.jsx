@@ -40,6 +40,7 @@ function App() {
     );
 
     console.log("Filtered Files:", filtered);
+    console.log("files", files);
 
     setResultsCount(filtered.length);
     setFilteredFiles(filtered);

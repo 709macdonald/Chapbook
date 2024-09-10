@@ -6,6 +6,7 @@ const FileManager = ({
   setFolderName,
   setIsLoadingFiles,
   folderName,
+  files: appFiles, // pass the files from App
 }) => {
   const [files, setFilesState] = useState([]);
 
@@ -23,7 +24,10 @@ const FileManager = ({
     if (selectedFiles.length > 0) {
       setIsLoadingFiles(true);
       const processedFiles = await processFiles(selectedFiles);
-      setFiles(processedFiles);
+
+      // Append the newly processed files to the existing files
+      setFiles((prevFiles) => [...prevFiles, ...processedFiles]);
+
       setIsLoadingFiles(false);
     }
   };
