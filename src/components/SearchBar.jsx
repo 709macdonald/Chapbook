@@ -57,6 +57,7 @@ const SearchBar = ({
           placeholder="Search for Keywords"
         />
         <button className="searchButton" onClick={handleSearch}>
+          Search
           <i className="fa-solid fa-magnifying-glass searchIcon"></i>
         </button>
       </div>

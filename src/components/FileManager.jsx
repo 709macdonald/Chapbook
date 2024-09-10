@@ -43,29 +43,32 @@ const FileManager = ({
 
   return (
     <div className="documentSection">
-      <div className="documentSectionDiv">
-        <input
-          type="file"
-          onChange={handleFileChange}
-          accept="application/pdf, image/*"
-          multiple
-          className="fileInput"
-          id="fileInputFiles"
-        />
-        <label htmlFor="fileInputFiles" className="fileInputLabel">
-          <i className="fa-solid fa-file folderIcon"></i> Select Files
-        </label>
+      <hr></hr>
+      <input
+        type="file"
+        onChange={handleFileChange}
+        accept="application/pdf, image/*"
+        multiple
+        className="fileInput"
+        id="fileInputFiles"
+      />
+      <label htmlFor="fileInputFiles" className="fileInputLabel">
+        <i className="fa-solid fa-file folderIcon"></i> Select Files
+      </label>
+      <hr></hr>
 
-        <input
-          type="file"
-          onChange={handleFileChange}
-          webkitdirectory=""
-          className="fileInput"
-          id="fileInputDirectory"
-        />
-        <label htmlFor="fileInputDirectory" className="fileInputLabel">
-          <i className="fa-solid fa-folder folderIcon"></i> Select Folder
-        </label>
+      <input
+        type="file"
+        onChange={handleFileChange}
+        webkitdirectory=""
+        className="fileInput"
+        id="fileInputDirectory"
+      />
+      <label htmlFor="fileInputDirectory" className="fileInputLabel">
+        <i className="fa-solid fa-folder folderIcon"></i> Select Folder
+      </label>
+      <hr></hr>
+      <div className="folderSelectionTitleDiv">
         <p className="folderName">{folderName}</p>
         <button onClick={handleReset} className="resetButton">
           Reset
