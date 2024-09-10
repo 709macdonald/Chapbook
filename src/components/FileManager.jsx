@@ -40,7 +40,7 @@ const FileManager = ({
     if (confirmReset) {
       setFilesState([]);
       setFiles([]);
-      setFolderName("");
+      setFolderName("No Selection.");
       setIsLoadingFiles(false);
     }
   };

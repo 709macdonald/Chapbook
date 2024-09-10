@@ -5,7 +5,7 @@ import Sidebar from "./components/Sidebar";
 function App() {
   const [files, setFiles] = useState([]);
   const [filteredFiles, setFilteredFiles] = useState([]);
-  const [folderName, setFolderName] = useState("No Folder Selected");
+  const [folderName, setFolderName] = useState("No Selection.");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [resultsCount, setResultsCount] = useState(0);
   const [similarWords, setSimilarWords] = useState([]);
@@ -13,7 +13,24 @@ function App() {
   const [isLoadingFiles, setIsLoadingFiles] = useState(false);
 
   function handleSearch(keywords) {
-    setSearchKeyword(keywords[0]);
+    const searchTerm = keywords[0];
+    setSearchKeyword(searchTerm);
+
+    if (!searchTerm) {
+      // If search term is empty, reset filteredFiles and matchedWords
+      setFilteredFiles([]);
+      setResultsCount(files.length);
+
+      // Reset matchedWords in each file
+      setFiles((prevFiles) =>
+        prevFiles.map((file) => ({
+          ...file,
+          matchedWords: [],
+        }))
+      );
+
+      return;
+    }
 
     const lowerCaseKeywords = keywords.map((keyword) => keyword.toLowerCase());
 
@@ -27,20 +44,11 @@ function App() {
 
       return {
         ...file,
-        text: file.text || "",
-        name: file.name || "",
         matchedWords,
       };
     });
 
-    const filtered = validFiles.filter((file) =>
-      lowerCaseKeywords.some(
-        (keyword) => file.text.includes(keyword) || file.name.includes(keyword)
-      )
-    );
-
-    console.log("Filtered Files:", filtered);
-    console.log("files", files);
+    const filtered = validFiles.filter((file) => file.matchedWords.length > 0);
 
     setResultsCount(filtered.length);
     setFilteredFiles(filtered);
