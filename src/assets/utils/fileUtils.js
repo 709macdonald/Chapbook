@@ -1,6 +1,6 @@
-// src/assets/utils/fileUtils.js
 import { extractTextFromPDF } from "./pdfUtils";
 import { extractTextFromImage } from "./imageUtils";
+import { extractTextFromWordDoc } from "./wordUtils"; // Import word extraction
 
 export const processFiles = async (files) => {
   const processedFiles = [];
@@ -22,6 +22,11 @@ export const processFiles = async (files) => {
         fileData.text = await extractTextFromPDF(file);
       } else if (file.type.startsWith("image/")) {
         fileData.text = await extractTextFromImage(file);
+      } else if (
+        file.type ===
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      ) {
+        fileData.text = await extractTextFromWordDoc(file); // Handle Word files
       }
 
       processedFiles.push(fileData);
