@@ -93,6 +93,14 @@
 
 .loadingText {
   margin-left: 1rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.loadingDots {
+  display: inline-block;
+  width: 20px; /* Adjust this width depending on your design */
+  text-align: left;
 }
 
 .fileList {
