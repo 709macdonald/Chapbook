@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import LoadingGear from "./LoadingGear";
 import FileDisplayScreen from "./FileDisplayScreen";
+import FileViewScreen from "./FileViewScreen";
 
 export default function Main({ files, isLoadingFiles }) {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleViewFile = (file) => {
+    setSelectedFile(file); // Set the selected file
+  };
+
+  const handleBackToDisplay = () => {
+    setSelectedFile(null); // Reset to show FileDisplayScreen
+  };
+
   return (
     <div className="mainContainer">
       {isLoadingFiles ? (
@@ -15,7 +26,14 @@ export default function Main({ files, isLoadingFiles }) {
             </h2>
           </div>
           <div className="mainScreen">
-            <FileDisplayScreen files={files} />
+            {selectedFile ? (
+              <FileViewScreen
+                file={selectedFile}
+                onBack={handleBackToDisplay}
+              />
+            ) : (
+              <FileDisplayScreen files={files} onViewFile={handleViewFile} />
+            )}
           </div>
         </>
       )}

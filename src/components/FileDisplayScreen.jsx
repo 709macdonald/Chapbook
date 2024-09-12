@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function FileDisplayScreen({ files }) {
+export default function FileDisplayScreen({ files, onViewFile }) {
   const filesWithText = React.useMemo(() => {
     return files.filter((file) => file.text.trim() !== "");
   }, [files]);
@@ -64,14 +64,12 @@ export default function FileDisplayScreen({ files }) {
                 )}
               </p>
               {isPdf(file) || isImage(file) ? (
-                <a
-                  href={file.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
                   className="fileView"
+                  onClick={() => onViewFile(file)} // Call onViewFile when clicked
                 >
                   View File
-                </a>
+                </button>
               ) : isWordDoc(file) ? (
                 <a href={file.url} download={file.name} className="fileView">
                   Download File
