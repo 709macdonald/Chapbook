@@ -5,16 +5,11 @@ import Sidebar from "./components/Sidebar";
 function App() {
   const [files, setFiles] = useState([]);
   const [filteredFiles, setFilteredFiles] = useState([]);
-  const [folderName, setFolderName] = useState("No Selection.");
-  const [searchKeyword, setSearchKeyword] = useState("");
   const [resultsCount, setResultsCount] = useState(0);
-  const [similarWords, setSimilarWords] = useState([]);
-  const [isAssistedSearchOn, setIsAssistedSearchOn] = useState(false);
   const [isLoadingFiles, setIsLoadingFiles] = useState(false);
 
   function handleSearch(keywords) {
     const searchTerm = keywords[0];
-    setSearchKeyword(searchTerm);
 
     if (!searchTerm) {
       setFilteredFiles([]);
@@ -72,15 +67,8 @@ function App() {
     <>
       <Sidebar
         setFiles={setFiles}
-        folderName={folderName}
-        setFolderName={setFolderName}
-        searchKeyword={searchKeyword}
         resultsCount={resultsCount}
-        similarWords={similarWords}
-        isAssistedSearchOn={isAssistedSearchOn}
-        setIsAssistedSearchOn={setIsAssistedSearchOn}
-        onSearch={handleSearch}
-        setSimilarWords={setSimilarWords}
+        handleSearch={handleSearch}
         setIsLoadingFiles={setIsLoadingFiles}
       />
       <Main
