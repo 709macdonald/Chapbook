@@ -9,7 +9,7 @@ function LoadingGear({ isVisible }) {
         if (prevDots === "...") return "";
         return prevDots + ".";
       });
-    }, 500); // Adjust timing here if needed
+    }, 500);
 
     return () => clearInterval(interval);
   }, []);

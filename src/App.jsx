@@ -17,11 +17,9 @@ function App() {
     setSearchKeyword(searchTerm);
 
     if (!searchTerm) {
-      // If search term is empty, reset filteredFiles and matchedWords
       setFilteredFiles([]);
       setResultsCount(files.length);
 
-      // Reset matchedWords in each file
       setFiles((prevFiles) =>
         prevFiles.map((file) => ({
           ...file,

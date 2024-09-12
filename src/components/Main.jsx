@@ -1,24 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import LoadingGear from "./LoadingGear";
-import PDFRenderer from "./PDFRenderer";
+import FileDisplayScreen from "./FileDisplayScreen";
 
 export default function Main({ files, isLoadingFiles }) {
-  const filesWithText = React.useMemo(() => {
-    return files.filter((file) => file.text.trim() !== "");
-  }, [files]);
-
-  const isPdf = (file) => file.type === "application/pdf";
-  const isImage = (file) => file.type.startsWith("image/");
-  const isWordDoc = (file) =>
-    file.type ===
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-
-  const [renderErrors, setRenderErrors] = useState({});
-
-  const handleRenderError = (fileUrl) => {
-    setRenderErrors((prev) => ({ ...prev, [fileUrl]: true }));
-  };
-
   return (
     <div className="mainContainer">
       {isLoadingFiles ? (
@@ -31,78 +15,8 @@ export default function Main({ files, isLoadingFiles }) {
             </h2>
           </div>
           <div className="mainScreen">
-            <div className="fileList">
-              {filesWithText.length > 0 ? (
-                filesWithText.map((file) => (
-                  <div key={file.url} className="fileDisplay">
-                    {isPdf(file) ? (
-                      !renderErrors[file.url] ? (
-                        <iframe
-                          src={file.url}
-                          title={file.name}
-                          style={{ width: "9rem", height: "12rem" }}
-                          onError={() => handleRenderError(file.url)}
-                        ></iframe>
-                      ) : (
-                        <i className="fa-regular fa-file-pdf pdfIcon"></i>
-                      )
-                    ) : isImage(file) ? (
-                      !renderErrors[file.url] ? (
-                        <img
-                          src={file.url}
-                          alt={file.name}
-                          style={{ width: "9rem", height: "12rem" }}
-                          onError={() => handleRenderError(file.url)}
-                        />
-                      ) : (
-                        <i className="fa-regular fa-file-image imageIcon"></i>
-                      )
-                    ) : isWordDoc(file) ? (
-                      <i className="fa-regular fa-file-word wordIcon"></i>
-                    ) : (
-                      <i className="fa-regular fa-file wordIcon"></i>
-                    )}
-                    <div className="fileDisplayText">
-                      <p className="pdfText">{file.name}</p>
-                      <p className="matchedWords">
-                        {file.matchedWords.length > 0 ? (
-                          <>
-                            Found:{" "}
-                            <span className="showMatchedWords">
-                              {file.matchedWords.join(", ")}
-                            </span>
-                          </>
-                        ) : (
-                          ""
-                        )}
-                      </p>
-                      {isPdf(file) || isImage(file) ? (
-                        <a
-                          href={file.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="fileView"
-                        >
-                          View File
-                        </a>
-                      ) : isWordDoc(file) ? (
-                        <a
-                          href={file.url}
-                          download={file.name} // Enable download with correct file name
-                          className="fileView"
-                        >
-                          Download File
-                        </a>
-                      ) : null}
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="noFilesDisplay">No files to display</p>
-              )}
-            </div>
+            <FileDisplayScreen files={files} />
           </div>
-          r
         </>
       )}
     </div>
