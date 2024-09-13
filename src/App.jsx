@@ -8,6 +8,26 @@ function App() {
   const [resultsCount, setResultsCount] = useState(0);
   const [isLoadingFiles, setIsLoadingFiles] = useState(false);
 
+  // Load files from local storage on component mount
+  useEffect(() => {
+    const storedFiles = localStorage.getItem("files");
+    if (storedFiles) {
+      try {
+        setFiles(JSON.parse(storedFiles));
+      } catch (error) {
+        console.error("Failed to parse files from local storage", error);
+        localStorage.removeItem("files");
+      }
+    }
+  }, []);
+
+  // Save files to local storage whenever files state changes
+  useEffect(() => {
+    if (files.length > 0) {
+      localStorage.setItem("files", JSON.stringify(files));
+    }
+  }, [files]);
+
   function handleSearch(keywords) {
     const searchTerm = keywords[0];
 
