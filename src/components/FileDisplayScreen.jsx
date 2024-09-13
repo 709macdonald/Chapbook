@@ -65,8 +65,8 @@ export default function FileDisplayScreen({ files, onViewFile }) {
               </p>
               {isPdf(file) || isImage(file) ? (
                 <button
+                  onClick={() => onViewFile(file)} // Trigger file view
                   className="fileView"
-                  onClick={() => onViewFile(file)} // Call onViewFile when clicked
                 >
                   View File
                 </button>

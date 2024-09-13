@@ -1,20 +1,30 @@
 import React from "react";
 
 export default function FileViewScreen({ file, onBack }) {
+  const getWordCount = (text) => {
+    return text ? text.split(/\s+/).length : 0;
+  };
+
+  // Check if lastModifiedDate exists, use a fallback if it's undefined
+  const formattedDate = file.lastModifiedDate
+    ? new Date(file.lastModifiedDate).toLocaleDateString()
+    : "Unknown Date";
+
   return (
-    <div className="fileViewScreen">
-      <button className="backButton" onClick={onBack}>
-        Back to Files
+    <div className="fileViewContainer">
+      <button onClick={onBack} className="backButton">
+        Back
       </button>
-      {file.type === "application/pdf" || file.type.startsWith("image/") ? (
-        <iframe
-          src={file.url}
-          title={file.name}
-          style={{ width: "100%", height: "90vh" }}
-        ></iframe>
-      ) : (
-        <p>File format not supported for inline view.</p>
-      )}
+      <div className="fileDetails">
+        <h3>{file.name}</h3>
+        <p>Date Created: {formattedDate}</p>
+        <p>Word Count: {getWordCount(file.text)}</p>
+      </div>
+      <iframe
+        src={file.url}
+        title={file.name}
+        style={{ width: "100%", height: "80vh" }}
+      ></iframe>
     </div>
   );
 }

@@ -4,14 +4,14 @@ import FileDisplayScreen from "./FileDisplayScreen";
 import FileViewScreen from "./FileViewScreen";
 
 export default function Main({ files, isLoadingFiles }) {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null); // State to track selected file
 
   const handleViewFile = (file) => {
-    setSelectedFile(file); // Set the selected file
+    setSelectedFile(file); // Set the selected file for viewing
   };
 
   const handleBackToDisplay = () => {
-    setSelectedFile(null); // Reset to show FileDisplayScreen
+    setSelectedFile(null); // Reset the selected file when going back
   };
 
   return (
@@ -29,7 +29,7 @@ export default function Main({ files, isLoadingFiles }) {
             {selectedFile ? (
               <FileViewScreen
                 file={selectedFile}
-                onBack={handleBackToDisplay}
+                onBack={handleBackToDisplay} // Pass the back function
               />
             ) : (
               <FileDisplayScreen files={files} onViewFile={handleViewFile} />
