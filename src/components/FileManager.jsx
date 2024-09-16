@@ -6,7 +6,7 @@ const FileManager = ({
   setFolderName,
   setIsLoadingFiles,
   folderName,
-  files: appFiles, // pass the files from App
+  files: appFiles,
 }) => {
   const [files, setFilesState] = useState([]);
 
@@ -25,7 +25,6 @@ const FileManager = ({
       setIsLoadingFiles(true);
       const processedFiles = await processFiles(selectedFiles);
 
-      // Append the newly processed files to the existing files
       setFiles((prevFiles) => [...prevFiles, ...processedFiles]);
 
       setIsLoadingFiles(false);
@@ -42,6 +41,7 @@ const FileManager = ({
       setFiles([]);
       setFolderName("No Selection.");
       setIsLoadingFiles(false);
+      localStorage.removeItem("files");
     }
   };
 
