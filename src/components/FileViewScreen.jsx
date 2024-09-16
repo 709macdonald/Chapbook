@@ -1,5 +1,4 @@
-// FileViewScreen.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function FileViewScreen({ file, onBack, onUpdateFile }) {
   const [newTag, setNewTag] = useState("");
@@ -20,7 +19,7 @@ export default function FileViewScreen({ file, onBack, onUpdateFile }) {
         if (f.url === file.url) {
           return {
             ...f,
-            tags: [...(f.tags || []), newTag],
+            tags: [...(f.tags || []), newTag], // Append the new tag to the existing array of tags
           };
         }
         return f;
@@ -41,7 +40,7 @@ export default function FileViewScreen({ file, onBack, onUpdateFile }) {
         if (f.url === file.url) {
           return {
             ...f,
-            tags: (f.tags || []).filter((_, i) => i !== index),
+            tags: (f.tags || []).filter((_, i) => i !== index), // Remove the tag at the specified index
           };
         }
         return f;
