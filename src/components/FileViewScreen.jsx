@@ -1,19 +1,53 @@
-import React from "react";
+// FileViewScreen.jsx
+import React, { useState, useEffect } from "react";
 
-export default function FileViewScreen({ file, onBack }) {
-  const getWordCount = (text) => {
-    return text ? text.split(/\s+/).length : 0;
+export default function FileViewScreen({ file, onBack, onUpdateFile }) {
+  const [newTag, setNewTag] = useState("");
+
+  const handleAddTag = () => {
+    if (!file || !file.tags) {
+      console.error("File or file.tags is undefined");
+      return;
+    }
+
+    if (typeof onUpdateFile !== "function") {
+      console.error("onUpdateFile is not a function");
+      return;
+    }
+
+    onUpdateFile((prevFiles) =>
+      prevFiles.map((f) => {
+        if (f.url === file.url) {
+          return {
+            ...f,
+            tags: [...(f.tags || []), newTag],
+          };
+        }
+        return f;
+      })
+    );
+
+    setNewTag(""); // Clear the input field
   };
 
-  const formattedDate = file.lastModifiedDate
-    ? new Date(file.lastModifiedDate).toLocaleDateString()
-    : "Unknown Date";
+  const handleRemoveTag = (index) => {
+    if (typeof onUpdateFile !== "function") {
+      console.error("onUpdateFile is not a function");
+      return;
+    }
 
-  const isPdf = file.type === "application/pdf";
-  const isImage = file.type.startsWith("image/");
-  const isWordDoc =
-    file.type ===
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    onUpdateFile((prevFiles) =>
+      prevFiles.map((f) => {
+        if (f.url === file.url) {
+          return {
+            ...f,
+            tags: (f.tags || []).filter((_, i) => i !== index),
+          };
+        }
+        return f;
+      })
+    );
+  };
 
   return (
     <div className="fileViewContainer">
@@ -22,30 +56,32 @@ export default function FileViewScreen({ file, onBack }) {
       </button>
       <div className="fileDetails">
         <h3>{file.name}</h3>
-        <p>Date Created: {formattedDate}</p>
-        <p>Word Count: {getWordCount(file.text)}</p>
+        <p>
+          Date Created: {new Date(file.lastModifiedDate).toLocaleDateString()}
+        </p>
+        <p>Word Count: {file.text.split(/\s+/).length}</p>
       </div>
-
-      {/* Download Button */}
-      <a href={file.url} download={file.name} className="downloadButton">
-        Download File
-      </a>
-
-      {/* Conditionally render based on file type */}
-      {isPdf || isImage ? (
-        <iframe
-          src={file.url}
-          title={file.name}
-          style={{ width: "100%", height: "80vh" }}
-        ></iframe>
-      ) : isWordDoc ? (
-        <div className="wordDocText">
-          <h4>Extracted Text:</h4>
-          <p>{file.text}</p>
+      <iframe
+        src={file.url}
+        title={file.name}
+        style={{ width: "100%", height: "80vh" }}
+      ></iframe>
+      <div className="tagsSection">
+        <input
+          type="text"
+          value={newTag}
+          onChange={(e) => setNewTag(e.target.value)}
+          placeholder="Add a tag"
+        />
+        <button onClick={handleAddTag}>Add Tag</button>
+        <div className="tagsList">
+          {(file.tags || []).map((tag, index) => (
+            <div key={index}>
+              {tag} <button onClick={() => handleRemoveTag(index)}>x</button>
+            </div>
+          ))}
         </div>
-      ) : (
-        <p>Unsupported file type</p>
-      )}
+      </div>
     </div>
   );
 }

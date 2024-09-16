@@ -16,6 +16,7 @@ export const processFiles = async (files) => {
         fileObject: file,
         text: "",
         matchedWords: [],
+        tags: [], // Initialize tags as an empty array
       };
 
       if (file.type === "application/pdf") {
@@ -39,6 +40,7 @@ export const processFiles = async (files) => {
         type: file.type,
         fileObject: file,
         text: "",
+        tags: [], // Initialize tags as an empty array
       });
     }
   }

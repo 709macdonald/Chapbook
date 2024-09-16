@@ -3,15 +3,23 @@ import LoadingGear from "./LoadingGear";
 import FileDisplayScreen from "./FileDisplayScreen";
 import FileViewScreen from "./FileViewScreen";
 
-export default function Main({ files, isLoadingFiles }) {
-  const [selectedFile, setSelectedFile] = useState(null); // State to track selected file
+export default function Main({ files, setFiles, isLoadingFiles }) {
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleViewFile = (file) => {
-    setSelectedFile(file); // Set the selected file for viewing
+    setSelectedFile(file);
   };
 
   const handleBackToDisplay = () => {
-    setSelectedFile(null); // Reset the selected file when going back
+    setSelectedFile(null);
+  };
+
+  const handleUpdateFile = (updateFn) => {
+    setFiles((prevFiles) => {
+      const updatedFiles = updateFn(prevFiles);
+      console.log("Updated files array:", updatedFiles); // Log the updated files array
+      return updatedFiles;
+    });
   };
 
   return (
@@ -29,10 +37,15 @@ export default function Main({ files, isLoadingFiles }) {
             {selectedFile ? (
               <FileViewScreen
                 file={selectedFile}
-                onBack={handleBackToDisplay} // Pass the back function
+                onBack={handleBackToDisplay}
+                onUpdateFile={handleUpdateFile} // Pass handleUpdateFile
               />
             ) : (
-              <FileDisplayScreen files={files} onViewFile={handleViewFile} />
+              <FileDisplayScreen
+                files={files}
+                file={selectedFile}
+                onViewFile={handleViewFile}
+              />
             )}
           </div>
         </>

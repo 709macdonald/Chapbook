@@ -93,6 +93,7 @@ function App() {
       <Main
         files={filteredFiles.length > 0 ? filteredFiles : files}
         isLoadingFiles={isLoadingFiles}
+        setFiles={setFiles}
       />
     </>
   );
