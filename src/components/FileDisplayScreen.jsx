@@ -63,17 +63,13 @@ export default function FileDisplayScreen({ files, onViewFile }) {
                   ""
                 )}
               </p>
-              {isPdf(file) || isImage(file) ? (
+              {isPdf(file) || isImage(file) || isWordDoc(file) ? (
                 <button
-                  onClick={() => onViewFile(file)} // Trigger file view
+                  onClick={() => onViewFile(file)} // View file for Word docs too
                   className="fileView"
                 >
                   View File
                 </button>
-              ) : isWordDoc(file) ? (
-                <a href={file.url} download={file.name} className="fileView">
-                  Download File
-                </a>
               ) : null}
             </div>
           </div>

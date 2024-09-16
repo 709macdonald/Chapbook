@@ -8,7 +8,6 @@ function App() {
   const [resultsCount, setResultsCount] = useState(0);
   const [isLoadingFiles, setIsLoadingFiles] = useState(false);
 
-  // Load files from local storage on component mount
   useEffect(() => {
     const storedFiles = localStorage.getItem("files");
     if (storedFiles) {
@@ -21,7 +20,6 @@ function App() {
     }
   }, []);
 
-  // Save files to local storage whenever files state changes
   useEffect(() => {
     if (files.length > 0) {
       localStorage.setItem("files", JSON.stringify(files));
@@ -81,6 +79,7 @@ function App() {
     } else {
       console.log("Not loading files.");
     }
+    console.log(files);
   }, [isLoadingFiles]);
 
   return (
