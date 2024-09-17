@@ -7,53 +7,42 @@ const SearchBar = ({
   setSimilarWords,
   isAssistedSearchOn,
   setIsAssistedSearchOn,
-  files, // Pass files prop here to get the data to match words from
+  files,
 }) => {
   const [keyword, setKeyword] = useState(searchKeyword);
-  const [suggestions, setSuggestions] = useState([]); // New state for predictive words
-
+  const [suggestions, setSuggestions] = useState([]);
   useEffect(() => {
-    setKeyword(searchKeyword); // Initialize keyword with searchKeyword
+    setKeyword(searchKeyword);
   }, [searchKeyword]);
 
-  // Listen for changes in the keyword and update suggestions
   useEffect(() => {
-    // Trigger search with delay (debounced)
     const delayDebounceFn = setTimeout(() => {
       handleSearch();
-      updateSuggestions(); // Generate the suggestions based on keyword input
+      updateSuggestions();
     }, 300);
 
-    return () => clearTimeout(delayDebounceFn); // Cleanup the timeout
+    return () => clearTimeout(delayDebounceFn);
   }, [keyword]);
 
-  // Handle assisted search toggle
   useEffect(() => {
     if (!isAssistedSearchOn) {
-      // If assisted search is turned off, update search immediately with only the main keyword
       handleSearch(true);
     } else {
-      // If assisted search is turned back on, update search with similar words
       handleSearch();
     }
   }, [isAssistedSearchOn]);
 
-  // Generate suggestions for predictive search based on the keyword
   const updateSuggestions = () => {
     if (!keyword) {
-      setSuggestions([]); // Clear suggestions if no input
+      setSuggestions([]);
       return;
     }
 
     const lowerCaseKeyword = keyword.toLowerCase();
-    // Match words from the file names and content
     const matchedSuggestions = files
-      .flatMap((file) => [
-        ...file.text.split(/\s+/), // split file text into words
-        file.name,
-      ])
-      .filter((word) => word.toLowerCase().startsWith(lowerCaseKeyword)) // Predictive logic
-      .slice(0, 10); // Limit to 10 suggestions
+      .flatMap((file) => [...file.text.split(/\s+/), file.name])
+      .filter((word) => word.toLowerCase().startsWith(lowerCaseKeyword))
+      .slice(0, 10);
 
     setSuggestions(matchedSuggestions);
   };
@@ -62,10 +51,8 @@ const SearchBar = ({
     let searchKeywords = [keyword];
 
     if (isAssistedSearchOn && !onlyMainKeyword) {
-      // Fetch similar words only if assisted search is on and not forced to only use the main keyword
       const fetchedSimilarWords = await fetchSimilarWords(keyword);
       if (fetchedSimilarWords.length === 0) {
-        // If no similar words are found, clear similarWords state
         setSimilarWords([]);
       } else {
         setSimilarWords(fetchedSimilarWords.slice(0, 10));
@@ -75,11 +62,9 @@ const SearchBar = ({
         ];
       }
     } else {
-      // Clear similar words if assisted search is off
       setSimilarWords([]);
     }
 
-    // Perform the search with the main keywords
     onSearch(searchKeywords);
   };
 
@@ -95,9 +80,9 @@ const SearchBar = ({
   };
 
   const handleSuggestionClick = (suggestion) => {
-    setKeyword(suggestion); // Populate the search bar with the selected suggestion
-    setSuggestions([]); // Clear suggestions after selection
-    handleSearch(); // Trigger the search for the selected suggestion
+    setKeyword(suggestion);
+    setSuggestions([]);
+    handleSearch();
   };
 
   return (
@@ -110,7 +95,6 @@ const SearchBar = ({
           onChange={(e) => setKeyword(e.target.value)}
           placeholder="Search for Keywords"
         />
-        {/* Display suggestions below the search bar */}
         {suggestions.length > 0 ? (
           <ul className="suggestionsDropdown">
             {suggestions.map((suggestion, index) => (

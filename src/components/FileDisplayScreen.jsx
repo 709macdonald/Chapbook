@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 export default function FileDisplayScreen({
   files,
   onViewFile,
   handleDeleteFile,
 }) {
-  const filesWithText = React.useMemo(() => {
+  const filesWithText = useMemo(() => {
     return files.filter((file) => file.text.trim() !== "");
   }, [files]);
 
@@ -69,10 +69,7 @@ export default function FileDisplayScreen({
                 )}
               </p>
               {isPdf(file) || isImage(file) || isWordDoc(file) ? (
-                <button
-                  onClick={() => onViewFile(file)} // View file for Word docs too
-                  className="fileView"
-                >
+                <button onClick={() => onViewFile(file)} className="fileView">
                   View File
                 </button>
               ) : null}

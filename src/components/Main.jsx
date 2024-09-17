@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import LoadingGear from "./LoadingGear";
 import FileDisplayScreen from "./FileDisplayScreen";
 import FileViewScreen from "./FileViewScreen";
@@ -8,34 +8,39 @@ export default function Main({
   setFiles,
   isLoadingFiles,
   handleDeleteFile,
+  searchKeyword, // Ensure this prop is passed correctly
 }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
-  // Handles viewing a selected file
   const handleViewFile = (file) => {
     setSelectedFile(file);
   };
 
-  // Handles going back to the file display screen
   const handleBackToDisplay = () => {
     setSelectedFile(null);
   };
 
-  // Handles updating files (for example, when tags are added or removed)
   const handleUpdateFile = (updateFn) => {
     setFiles((prevFiles) => {
       const updatedFiles = updateFn(prevFiles);
-
-      // After updating the files array, find the updated selected file and set it
       const updatedSelectedFile = updatedFiles.find(
         (f) => f.url === selectedFile.url
       );
-      setSelectedFile(updatedSelectedFile); // Ensure selectedFile is updated
-
-      console.log("Updated files array:", updatedFiles); // Log the updated files array for debugging
+      setSelectedFile(updatedSelectedFile);
       return updatedFiles;
     });
   };
+
+  // Determine which files to display
+  const filesToDisplay = searchKeyword
+    ? files.filter(
+        (file) =>
+          (file.text || "")
+            .toLowerCase()
+            .includes(searchKeyword.toLowerCase()) ||
+          (file.name || "").toLowerCase().includes(searchKeyword.toLowerCase())
+      )
+    : files; // Show all files when searchKeyword is empty
 
   return (
     <div className="mainContainer">
@@ -53,14 +58,16 @@ export default function Main({
               <FileViewScreen
                 file={selectedFile}
                 onBack={handleBackToDisplay}
-                onUpdateFile={handleUpdateFile} // Pass handleUpdateFile for adding/removing tags
+                onUpdateFile={handleUpdateFile}
               />
             ) : (
-              <FileDisplayScreen
-                files={files}
-                onViewFile={handleViewFile} // Pass the function to view the file
-                handleDeleteFile={handleDeleteFile} // Pass delete handler to Main
-              />
+              <>
+                <FileDisplayScreen
+                  files={filesToDisplay}
+                  onViewFile={handleViewFile}
+                  handleDeleteFile={handleDeleteFile}
+                />
+              </>
             )}
           </div>
         </>
