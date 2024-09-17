@@ -3,7 +3,12 @@ import LoadingGear from "./LoadingGear";
 import FileDisplayScreen from "./FileDisplayScreen";
 import FileViewScreen from "./FileViewScreen";
 
-export default function Main({ files, setFiles, isLoadingFiles }) {
+export default function Main({
+  files,
+  setFiles,
+  isLoadingFiles,
+  handleDeleteFile,
+}) {
   const [selectedFile, setSelectedFile] = useState(null);
 
   // Handles viewing a selected file
@@ -54,6 +59,7 @@ export default function Main({ files, setFiles, isLoadingFiles }) {
               <FileDisplayScreen
                 files={files}
                 onViewFile={handleViewFile} // Pass the function to view the file
+                handleDeleteFile={handleDeleteFile} // Pass delete handler to Main
               />
             )}
           </div>

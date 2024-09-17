@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-export default function FileDisplayScreen({ files, onViewFile }) {
+export default function FileDisplayScreen({
+  files,
+  onViewFile,
+  handleDeleteFile,
+}) {
   const filesWithText = React.useMemo(() => {
     return files.filter((file) => file.text.trim() !== "");
   }, [files]);
@@ -21,7 +25,7 @@ export default function FileDisplayScreen({ files, onViewFile }) {
     <div className="fileList">
       {filesWithText.length > 0 ? (
         filesWithText.map((file) => (
-          <div key={file.url} className="fileDisplay">
+          <div key={file.id} className="fileDisplay">
             {isPdf(file) ? (
               !renderErrors[file.url] ? (
                 <iframe
@@ -49,6 +53,7 @@ export default function FileDisplayScreen({ files, onViewFile }) {
             ) : (
               <i className="fa-regular fa-file wordIcon"></i>
             )}
+
             <div className="fileDisplayText">
               <p className="pdfText">{file.name}</p>
               <p className="matchedWords">
@@ -71,6 +76,12 @@ export default function FileDisplayScreen({ files, onViewFile }) {
                   View File
                 </button>
               ) : null}
+              <button
+                onClick={() => handleDeleteFile(file.id)}
+                className="fileDelete"
+              >
+                Delete File
+              </button>
             </div>
           </div>
         ))

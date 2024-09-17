@@ -7,31 +7,80 @@ const SearchBar = ({
   setSimilarWords,
   isAssistedSearchOn,
   setIsAssistedSearchOn,
+  files, // Pass files prop here to get the data to match words from
 }) => {
   const [keyword, setKeyword] = useState(searchKeyword);
+  const [suggestions, setSuggestions] = useState([]); // New state for predictive words
 
   useEffect(() => {
-    setKeyword(searchKeyword);
+    setKeyword(searchKeyword); // Initialize keyword with searchKeyword
   }, [searchKeyword]);
 
-  const handleSearch = async () => {
+  // Listen for changes in the keyword and update suggestions
+  useEffect(() => {
+    // Trigger search with delay (debounced)
+    const delayDebounceFn = setTimeout(() => {
+      handleSearch();
+      updateSuggestions(); // Generate the suggestions based on keyword input
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn); // Cleanup the timeout
+  }, [keyword]);
+
+  // Handle assisted search toggle
+  useEffect(() => {
+    if (!isAssistedSearchOn) {
+      // If assisted search is turned off, update search immediately with only the main keyword
+      handleSearch(true);
+    } else {
+      // If assisted search is turned back on, update search with similar words
+      handleSearch();
+    }
+  }, [isAssistedSearchOn]);
+
+  // Generate suggestions for predictive search based on the keyword
+  const updateSuggestions = () => {
+    if (!keyword) {
+      setSuggestions([]); // Clear suggestions if no input
+      return;
+    }
+
+    const lowerCaseKeyword = keyword.toLowerCase();
+    // Match words from the file names and content
+    const matchedSuggestions = files
+      .flatMap((file) => [
+        ...file.text.split(/\s+/), // split file text into words
+        file.name,
+      ])
+      .filter((word) => word.toLowerCase().startsWith(lowerCaseKeyword)) // Predictive logic
+      .slice(0, 10); // Limit to 10 suggestions
+
+    setSuggestions(matchedSuggestions);
+  };
+
+  const handleSearch = async (onlyMainKeyword = false) => {
     let searchKeywords = [keyword];
 
-    if (isAssistedSearchOn) {
+    if (isAssistedSearchOn && !onlyMainKeyword) {
+      // Fetch similar words only if assisted search is on and not forced to only use the main keyword
       const fetchedSimilarWords = await fetchSimilarWords(keyword);
-      setSimilarWords(fetchedSimilarWords.slice(0, 10));
-      searchKeywords = [...searchKeywords, ...fetchedSimilarWords.slice(0, 10)];
+      if (fetchedSimilarWords.length === 0) {
+        // If no similar words are found, clear similarWords state
+        setSimilarWords([]);
+      } else {
+        setSimilarWords(fetchedSimilarWords.slice(0, 10));
+        searchKeywords = [
+          ...searchKeywords,
+          ...fetchedSimilarWords.slice(0, 10),
+        ];
+      }
     } else {
+      // Clear similar words if assisted search is off
       setSimilarWords([]);
     }
 
+    // Perform the search with the main keywords
     onSearch(searchKeywords);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
   };
 
   const fetchSimilarWords = async (word) => {
@@ -45,6 +94,12 @@ const SearchBar = ({
     }
   };
 
+  const handleSuggestionClick = (suggestion) => {
+    setKeyword(suggestion); // Populate the search bar with the selected suggestion
+    setSuggestions([]); // Clear suggestions after selection
+    handleSearch(); // Trigger the search for the selected suggestion
+  };
+
   return (
     <div>
       <div className="searchField">
@@ -53,13 +108,24 @@ const SearchBar = ({
           id="searchBar"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
-          onKeyDown={handleKeyDown}
           placeholder="Search for Keywords"
         />
-        <button className="searchButton" onClick={handleSearch}>
-          Search
-          <i className="fa-solid fa-magnifying-glass searchIcon"></i>
-        </button>
+        {/* Display suggestions below the search bar */}
+        {suggestions.length > 0 ? (
+          <ul className="suggestionsDropdown">
+            {suggestions.map((suggestion, index) => (
+              <li
+                key={index}
+                onClick={() => handleSuggestionClick(suggestion)}
+                className="suggestionItem"
+              >
+                {suggestion}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          keyword && <p className="noResults">No suggestions found</p>
+        )}
       </div>
       <div className="assistedSearch">
         <label>
@@ -71,7 +137,7 @@ const SearchBar = ({
           />
         </label>
       </div>
-      {isAssistedSearchOn && similarWords.length > 0 && (
+      {isAssistedSearchOn && similarWords.length > 0 ? (
         <div className="similarWordsList">
           <p>Similar words:</p>
           <ul className="similarWord">
@@ -80,7 +146,9 @@ const SearchBar = ({
             ))}
           </ul>
         </div>
-      )}
+      ) : isAssistedSearchOn ? (
+        <p className="noResults">No similar words found</p>
+      ) : null}
     </div>
   );
 };

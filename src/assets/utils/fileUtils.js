@@ -10,6 +10,7 @@ export const processFiles = async (files) => {
 
     try {
       let fileData = {
+        id: Date.now() + Math.random(), // Generate a unique ID
         name: file.name,
         url, // Store the blob URL but don't trigger downloads
         type: file.type,
@@ -35,6 +36,7 @@ export const processFiles = async (files) => {
       alert(`Failed to extract text from file: ${file.name}`);
       console.error(`Failed to extract text from ${file.name}:`, error);
       processedFiles.push({
+        id: Date.now() + Math.random(), // Still generate a unique ID even on failure
         name: file.name,
         url, // Still store the URL even on failure
         type: file.type,

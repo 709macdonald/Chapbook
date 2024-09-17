@@ -7,6 +7,7 @@ function App() {
   const [filteredFiles, setFilteredFiles] = useState([]);
   const [resultsCount, setResultsCount] = useState(0);
   const [isLoadingFiles, setIsLoadingFiles] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState(""); // Added for displaying no results message
 
   useEffect(() => {
     const storedFiles = localStorage.getItem("files");
@@ -26,6 +27,12 @@ function App() {
     }
   }, [files]);
 
+  const handleDeleteFile = (id) => {
+    const updatedFiles = files.filter((file) => file.id !== id);
+    setFiles(updatedFiles);
+    setFilteredFiles(updatedFiles); // Also update filteredFiles if needed
+  };
+
   function handleSearch(keywords) {
     const searchTerm = keywords[0];
 
@@ -42,6 +49,8 @@ function App() {
 
       return;
     }
+
+    setSearchKeyword(searchTerm); // Update searchKeyword state for message display
 
     const lowerCaseKeywords = keywords.map((keyword) => keyword.toLowerCase());
 
@@ -63,10 +72,6 @@ function App() {
 
     setResultsCount(filtered.length);
     setFilteredFiles(filtered);
-
-    if (filtered.length === 0) {
-      alert("No words found");
-    }
   }
 
   useEffect(() => {
@@ -85,6 +90,7 @@ function App() {
   return (
     <>
       <Sidebar
+        files={files}
         setFiles={setFiles}
         resultsCount={resultsCount}
         handleSearch={handleSearch}
@@ -94,7 +100,12 @@ function App() {
         files={filteredFiles.length > 0 ? filteredFiles : files}
         isLoadingFiles={isLoadingFiles}
         setFiles={setFiles}
+        handleDeleteFile={handleDeleteFile} // Pass delete handler to Main
       />
+      {/* Display a no results message when there are no filtered files and a search has been performed */}
+      {filteredFiles.length === 0 && searchKeyword && (
+        <p className="noResultsMessage">No matching results found</p>
+      )}
     </>
   );
 }

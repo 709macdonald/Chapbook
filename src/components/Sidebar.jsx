@@ -7,6 +7,7 @@ export default function Sidebar({
   resultsCount,
   handleSearch,
   setIsLoadingFiles,
+  files,
 }) {
   const [folderName, setFolderName] = useState("No Selection.");
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -30,6 +31,7 @@ export default function Sidebar({
         <p className="resultsFound">Results found: {resultsCount}</p>
 
         <SearchBar
+          files={files}
           onSearch={handleSearch}
           searchKeyword={searchKeyword}
           similarWords={similarWords}

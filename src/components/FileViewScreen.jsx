@@ -56,7 +56,8 @@ export default function FileViewScreen({ file, onBack, onUpdateFile }) {
       <div className="fileDetails">
         <h3>{file.name}</h3>
         <p>
-          Date Created: {new Date(file.lastModifiedDate).toLocaleDateString()}
+          Date Created:{" "}
+          {new Date(file.fileObject.lastModifiedDate).toLocaleDateString()}
         </p>
         <p>Word Count: {file.text.split(/\s+/).length}</p>
       </div>
